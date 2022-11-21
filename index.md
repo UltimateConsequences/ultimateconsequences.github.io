@@ -25,13 +25,13 @@ We are hard at work on creating simple tools to allow social scientists, oral hi
 
 This website is here to provide access to:
 - **Background and documentation on the project** such as descriptions of the project
-- *(Soon)* Tools for viewing the dataset on the web
+- *(Soon)* **Tools** for viewing the dataset on the web
 - *(In 2023)* **Documentation on our R package** for the project
 - *(In 2023)* **Cited narrative descriptions** of lethal conflict events
 - **Archived copies of data pages** produced using RMarkdown that with
 automatically generated statements and visualizations that document claims made our research articles.
 
-## Video Introduction to the project
+## Video introduction to the project
 
 {% include youtubePlayer.html id="W_cCUbSOSqs" %}
 ----
