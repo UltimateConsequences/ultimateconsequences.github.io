@@ -1,114 +1,32 @@
 ---
 title: Ultimate Consequences
-layout: home
+layout: default
 ---
 
-# Ultimate Consequences: <br/> A comprehensive database of deaths in Bolivian political conflict during the democratic era, 1982–present
+# Ultimate Consequences:
+## A comprehensive database of deaths in Bolivian political conflict during the democratic era, 1982–present
 
-Mass grassroots politics in Bolivia has found highly contentious forms
-of action that were nonetheless distinct from a conventional military
-conflict. Its longer history, marked by indigenous uprisings, labor
-militancy, and frequent military rule has been described in terms of
-blood, fire, dynamite, and massacres. The social movement traditions
-that have resulted include proclamations of fearlessness (even
-protesting high schoolers shout, “Rifle, machine gun, we will not be
-silenced!”) and vows to carry struggles “until the final consequences.”
+Ultimate Consequences, a quantitative and qualitative database, unique in its
+depth and completeness of coverage, of all conflict deaths in Bolivia since
+October 1982, a period of largely elected governments and political dynamism.
+The database enables comparative analysis across twelve presidential
+administrations, four episodes where protesters successfully sought the end of a
+presidential term, and 192 protest events in 17 domains of conflict. As of
+November 2022, the project had identified **621** to **639** of these deaths,
+including those of **600** named individuals. The database is maintained as a
+Google Docs spreadsheet, which can be queried by R scripts, and whose reports
+can be generated internally or exported for further manual coding.
 
-The database enumerates individual deaths in Bolivian political conflict
-since 1982, the end of military rule in the country. It is compiled by a
-research team based on multiple sources, including media reports,
-governmental, intergovernmental, and private human rights reports, and
-use of the research literature on political conflict. The dataset now
-includes nearly all of the deaths identified by a Permanent Assembly of
-Human Rights-Bolivia (APDHB) study of deaths from 1988 to 2003, and a
-study of the coca conflict from 1982 to 2005 (Navarro Miranda 2006;
-Llorenti 2009; Salazar Ortuño 2008). Unlike prior compilations by human
-rights organizations, however, this database includes a variety of
-qualitative variables designed to understand how and why the deaths
-occurred and what policies and patterns underpin them.
+Due to the number of lethal events in the study period, the dataset is both large enough for quantitative research that analyzes patterns and small enough for qualitative, journalistic, and historical examination of the individual deaths involved. To serve these multiple purposes, we code information such as individuals’ relation to a specific social movement, protest campaign, cause of death, responsible parties, and location, and writing detailed narrative descriptions about major events.
 
-We designed the database to both catalog the lethal consequences of
-participation in social movements and political activism, and to assess
-responsibility, accountability, and impunity for violent deaths. All
-deaths are significant as signs of the price that has been paid to seek
-social change. Some deaths are also significant as elements of
-repression or violence for which someone might ultimately be held
-accountable. Rather than begin by asking, “Is this death someone’s
-fault?,” we are coding each death according to multiple factors that
-enable us to extract different subsets of the overall database for
-different purposes. We estimate there were between 580 to 620 deaths
-associated with Bolivian political conflict from October 1982 until
-December 2019. As of November 2022, the project had identified **621**
-to **639** of these deaths, including those of **600** named
-individuals. The database is maintained as a Google Docs spreadsheet,
-which can be queried by R scripts, and whose reports can be generated
-internally or exported for further manual coding. (**Bold numbers** in
-this paragraph are updated automatically using R scripts.)
+The project draws on journalistic, advocacy, and scholarly sources to comprehensively document all deaths in political conflict, including those not readily categorizable as human rights violations. The project also seeks to ask more intimate, and cultural, questions about the role of risk, violence, sacrifice, and loss in transformative social change. As the database reveals, Bolivian protest can involve intense risk, privation, self-sacrifice, and either enduring or inflicting violence. Bolivian social movement traditions include proclamations of fearlessness and vows to carry on their struggles “until the ultimate consequences,” that is, to persist in collective measures and to refuse to be deterred by deadly state violence.
 
-Through this process, we have become familiar with reading multiple and
-conflicting reports, evaluating official denials (we have created a data
-column for such denials), collecting narrative accounts, coding what we
-can based on the information, and signaling remaining questions. One
-thing that we have learned through this process is that making informed
-judgements, rather than marking all disputed facts with some kind of
-asterisk, is absolutely foundational to being able to do comparative
-work. The scale of the dataset for this period is both large enough to
-identify significant patterns and small enough (unlike the situation in
-some other Latin American countries) to permit the construction of a
-database that includes detailed information about every death. Precisely
-because its coverage is nearly comprehensive, the database offers a
-systematic sample of cases for quantitative and/or qualitative analysis,
-untainted by selection bias. We can say with near certainty that the
-dataset includes all episodes of political conflict that caused three or
-more deaths since 1982.
+We are hard at work on creating simple tools to allow social scientists, oral historians, and human rights advocates to generate and access summary data and individual entries in the database to answer their own questions. In 2023, we will publicly release a R package that will allow researchers to search, query, and visualize the dataset, and multiple web-accessible views of the database.
 
-The dataset offers a grounded view on such questions as: What practices
-and political choices result in some presidencies being far less violent
-than others? What is the relative importance of different forms of
-political violence, from repression of protest to guerrilla movements to
-fratricidal disputes among movements? Which movements have succeeded
-despite deadly repression? This database will serve as a new tool for
-social scientists, oral historians, and human rights advocates to use in
-answering these and other questions.
-
-The situations described in the dataset principally involve the
-following:
-
-1.  Deaths from repression or confrontations with security forces during
-    protest
-2.  Deaths from security force incursions into politically active
-    communities that are related to their activism
-3.  Deaths from inter-movement and intra-movement confrontations
-4.  Deaths of all kinds related to guerrilla or paramilitary activity
-5.  Deaths of all kinds related to the conflict over coca growing
-6.  Political assassinations of all kinds, including public officials,
-    political activists, and journalists
-7.  Deaths of social movement participants while in police custody for
-    their activism
-8.  Deaths from the hardships of protests and acts of self-sacrifice
-    such as hunger strikes, long-distance marches etc.
-9.  Acts of suicide as a form of protest
-10. All deaths related to land conflicts that involve a
-    collective/social movement organization on at least one side.
-
-For each death, we record identifying information about the person who
-died, the individual or group who caused the death, the place and time
-of the death, the cause and circumstances of the death, whether the
-death appears to be deliberate or intended, the geographic location, the
-death’s connection to social movements and social movement campaigns,
-sources of information available about the death, types of investigation
-that have been performed, accountability processes, and relationship to
-the Bolivian state. Analytical variables used so far include: political
-assassination (a binary yes/no category); protest domain (aggregating
-all protest campaigns into a small number of topics such as “labor” and
-“municipal governance”); and denial (a binary yes/no category indicating
-whether the perpetrator denied responsibility for the death). In
-creating database entries, we create brief narrative descriptions of the
-events involved and/or quote such descriptions directly from sources of
-reporting. We also are collecting textual segments of reporting and
-testimonial narrative relevant to each death.
-
-## ultimateconsequences.github.io
-The public-facing website for **Ultimate Consequences: A Digital Archive on Deaths in Bolivian Political Conflicts**
-
+This website is here to provide access to:
+- **Background and documentation on the project** such as descriptions of the project
+- *(Soon)* Tools for viewing the dataset on the web
+- *(In 2023)* **Documentation on our R package** for the project
+- *(In 2023)* **Cited narrative descriptions** of lethal conflict events
+- **Archived copies of data pages** produced using RMarkdown that with automatically generated statements and visualizations that document claims made our research articles.
 ----
