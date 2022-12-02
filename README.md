@@ -1,103 +1,98 @@
-# just-the-docs-template
+# Ultimate Consequences: <br/> A comprehensive database of deaths in Bolivian political conflict during the democratic era, 1982–present
 
-This is a *bare-minimum* template to create a [Jekyll] site that:
+Mass grassroots politics in Bolivia has found highly contentious forms
+of action that were nonetheless distinct from a conventional military
+conflict. Its longer history, marked by indigenous uprisings, labor
+militancy, and frequent military rule has been described in terms of
+blood, fire, dynamite, and massacres. The social movement traditions
+that have resulted include proclamations of fearlessness (even
+protesting high schoolers shout, “Rifle, machine gun, we will not be
+silenced!”) and vows to carry struggles “until the final consequences.”
 
-- uses the [Just the Docs] theme;
-- can be built and published on [GitHub Pages];
-- can be built and previewed locally, and published on other platforms.
+The database enumerates individual deaths in Bolivian political conflict
+since 1982, the end of military rule in the country. It is compiled by a
+research team based on multiple sources, including media reports,
+governmental, intergovernmental, and private human rights reports, and
+use of the research literature on political conflict. The dataset now
+includes nearly all of the deaths identified by a Permanent Assembly of
+Human Rights-Bolivia (APDHB) study of deaths from 1988 to 2003, and a
+study of the coca conflict from 1982 to 2005 (Navarro Miranda 2006;
+Llorenti 2009; Salazar Ortuño 2008). Unlike prior compilations by human
+rights organizations, however, this database includes a variety of
+qualitative variables designed to understand how and why the deaths
+occurred and what policies and patterns underpin them.
 
-More specifically, the created site:
+We designed the database to both catalog the lethal consequences of
+participation in social movements and political activism, and to assess
+responsibility, accountability, and impunity for violent deaths. All
+deaths are significant as signs of the price that has been paid to seek
+social change. Some deaths are also significant as elements of
+repression or violence for which someone might ultimately be held
+accountable. Rather than begin by asking, “Is this death someone’s
+fault?,” we are coding each death according to multiple factors that
+enable us to extract different subsets of the overall database for
+different purposes. We estimate there were between 580 to 620 deaths
+associated with Bolivian political conflict from October 1982 until
+December 2019. As of November 2022, the project had identified **621**
+to **639** of these deaths, including those of **600** named
+individuals. The database is maintained as a Google Docs spreadsheet,
+which can be queried by R scripts, and whose reports can be generated
+internally or exported for further manual coding. (**Bold numbers** in
+this paragraph are updated automatically using R scripts.)
 
-- uses a gem-based approach, i.e. uses a `Gemfile` and loads the `just-the-docs` gem;
-- uses the [GitHub Pages / Actions workflow] to build and publish the site on GitHub Pages.
+Through this process, we have become familiar with reading multiple and
+conflicting reports, evaluating official denials (we have created a data
+column for such denials), collecting narrative accounts, coding what we
+can based on the information, and signaling remaining questions. One
+thing that we have learned through this process is that making informed
+judgements, rather than marking all disputed facts with some kind of
+asterisk, is absolutely foundational to being able to do comparative
+work. The scale of the dataset for this period is both large enough to
+identify significant patterns and small enough (unlike the situation in
+some other Latin American countries) to permit the construction of a
+database that includes detailed information about every death. Precisely
+because its coverage is nearly comprehensive, the database offers a
+systematic sample of cases for quantitative and/or qualitative analysis,
+untainted by selection bias. We can say with near certainty that the
+dataset includes all episodes of political conflict that caused three or
+more deaths since 1982.
 
-To get started with creating a site, just click "[use this template]"!
+The dataset offers a grounded view on such questions as: What practices
+and political choices result in some presidencies being far less violent
+than others? What is the relative importance of different forms of
+political violence, from repression of protest to guerrilla movements to
+fratricidal disputes among movements? Which movements have succeeded
+despite deadly repression? This database will serve as a new tool for
+social scientists, oral historians, and human rights advocates to use in
+answering these and other questions.
 
-After completing the creation of your new site on GitHub, update it as needed:
+For each death, we record identifying information about the person who
+died, the individual or group who caused the death, the place and time
+of the death, the cause and circumstances of the death, whether the
+death appears to be deliberate or intended, the geographic location, the
+death’s connection to social movements and social movement campaigns,
+sources of information available about the death, types of investigation
+that have been performed, accountability processes, and relationship to
+the Bolivian state. Analytical variables used so far include: political
+assassination (a binary yes/no category); protest domain (aggregating
+all protest campaigns into a small number of topics such as “labor” and
+“municipal governance”); and denial (a binary yes/no category indicating
+whether the perpetrator denied responsibility for the death). In
+creating database entries, we create brief narrative descriptions of the
+events involved and/or quote such descriptions directly from sources of
+reporting. We also are collecting textual segments of reporting and
+testimonial narrative relevant to each death.
 
-## Replace the content of the template pages
+## ultimateconsequences.github.io
+This is the public-facing website for **Ultimate Consequences: A Digital Archive on Deaths in Bolivian Political Conflicts**
 
-Update the following files to your own content:
+Shield: [![CC BY-SA 4.0][cc-by-sa-shield]][cc-by-sa]
 
-- `index.md` (your new home page)
-- `README.md` (information for those who access your site repo on GitHub)
+This work is licensed under a
+[Creative Commons Attribution-ShareAlike 4.0 International License][cc-by-sa].
 
-## Changing the version of the theme and/or Jekyll
+[![CC BY-SA 4.0][cc-by-sa-image]][cc-by-sa]
 
-Simply edit the relevant line(s) in the `Gemfile`.
-
-## Adding a plugin
-
-The Just the Docs theme automatically includes the [`jekyll-seo-tag`] plugin.
-
-To add an extra plugin, you need to add it in the `Gemfile` *and* in `_config.yml`. For example, to add [`jekyll-default-layout`]:
-
-- Add the following to your site's `Gemfile`:
-
-  ```ruby
-  gem "jekyll-default-layout"
-  ```
-
-- And add the following to your site's `_config.yml`:
-
-  ```yaml
-  plugins:
-    - jekyll-default-layout
-  ```
-  
-Note: If you are using a Jekyll version less than 3.5.0, use the `gems` key instead of `plugins`.
-
-## Publishing your site on GitHub Pages
-
-1.  If your created site is `YOUR-USERNAME/YOUR-SITE-NAME`, update `_config.yml` to:
-
-    ```yaml
-    title: YOUR TITLE
-    description: YOUR DESCRIPTION
-    theme: just-the-docs
-
-    url: https://YOUR-USERNAME.github.io/YOUR-SITE-NAME
-
-    aux_links: # remove if you don't want this link to appear on your pages
-      Template Repository: https://github.com/YOUR-USERNAME/YOUR-SITE-NAME
-    ```
-
-2.  Push your updated `_config.yml` to your site on GitHub.
-
-3.  In your newly created repo on GitHub:
-    - go to the `Settings` tab -> `Pages` -> `Build and deployment`, then select `Source`: `GitHub Actions`.
-    - if there were any failed Actions, go to the `Actions` tab and click on `Re-run jobs`.
-
-## Building and previewing your site locally
-
-Assuming [Jekyll] and [Bundler] are installed on your computer:
-
-1.  Change your working directory to the root directory of your site.
-
-2.  Run `bundle install`.
-
-3.  Run `bundle exec jekyll serve` to build your site and preview it at `localhost:4000`.
-
-    The built site is stored in the directory `_site`.
-
-## Publishing your built site on a different platform
-
-Just upload all the files in the directory `_site`.
-
-## Customization
-
-You're free to customize sites that you create with this template, however you like!
-
-[Browse our documentation][Just the Docs] to learn more about how to use this theme.
-
-----
-
-[^1]: [It can take up to 10 minutes for changes to your site to publish after you push the changes to GitHub](https://docs.github.com/en/pages/setting-up-a-github-pages-site-with-jekyll/creating-a-github-pages-site-with-jekyll#creating-your-site).
-
-[Jekyll]: https://jekyllrb.com
-[Just the Docs]: https://just-the-docs.github.io/just-the-docs/
-[GitHub Pages]: https://docs.github.com/en/pages
-[Bundler]: https://bundler.io
-[use this template]: https://github.com/just-the-docs/just-the-docs-template/generate
-[`jekyll-default-layout`]: https://github.com/benbalter/jekyll-default-layout
-[`jekyll-seo-tag`]: https://jekyll.github.io/jekyll-seo-tag
+[cc-by-sa]: http://creativecommons.org/licenses/by-sa/4.0/
+[cc-by-sa-image]: https://licensebuttons.net/l/by-sa/4.0/88x31.png
+[cc-by-sa-shield]: https://img.shields.io/badge/License-CC%20BY--SA%204.0-lightgrey.svg
