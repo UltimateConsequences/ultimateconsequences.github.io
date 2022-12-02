@@ -1,6 +1,8 @@
 ---
-title: About the project
+title: About the Project
 layout: default
+nav_order: 2
+has_children: true
 ---
 
 # Ultimate Consequences:
