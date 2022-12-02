@@ -1,3 +1,7 @@
+---
+title: Methodology
+parent: About the Project
+---
 # Methodology
 The Ultimate Consequences database enumerates individual deaths in Bolivian political conflict since October 1982, the end of military rule in the country. It is compiled by the research team based on multiple sources, including media reports, governmental, intergovernmental, and private human rights reports, and use of the research literature on political conflict. The dataset now includes nearly all of the deaths identified by a Permanent Assembly of Human Rights-Bolivia (APDHB) study of deaths from 1988 to 2003, and a study of the coca conflict from 1982 to 2005 (Navarro Miranda 2006; Llorenti 2009; Salazar Ortuño 2008). Unlike prior compilations by human rights organizations, however, this database includes a variety of qualitative variables designed to understand how and why the deaths occurred and what policies and patterns underpin them.
 The scale of the dataset for this period is both large enough to identify significant patterns and small enough (unlike the situation in some other Latin American countries) to permit the construction of a database that includes detailed information about every death. Precisely because its coverage is nearly comprehensive, the database offers a systematic sample of cases for quantitative and/or qualitative analysis, untainted by selection bias. 
