@@ -1,6 +1,6 @@
 ---
 title: Methodology
-layout: pages
+layout: default
 parent: About the Project
 ---
 # Methodology
