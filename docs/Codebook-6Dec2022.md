@@ -1,5 +1,6 @@
 ---
 title: Codebook for Ultimate Consequences
+layout: default
 nav_exclude: true
 ---
 
