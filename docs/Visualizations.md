@@ -1,7 +1,6 @@
 ---
 title: Visualizations
 layout: default
-parent: About the Project
 ---
 # Visualizing the database
 
