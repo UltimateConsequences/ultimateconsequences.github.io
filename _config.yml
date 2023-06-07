@@ -3,8 +3,8 @@ description: A comprehensive database of deaths in Bolivian political conflict
 theme: just-the-docs
 
 callouts:
-  warning:
-   title: note
+  note:
+   title: Note
    color: purple
 
 url: https://ultimateconsequences.github.io
