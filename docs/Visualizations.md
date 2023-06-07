@@ -18,7 +18,7 @@ The Ultimate Consequences web portal will offer visitors graphical and interpret
 | **Data Visualization (in English)** | **Visualización de datos (en castellano)** |
 |---|---|---|
 | [Directory of Deaths by Event](/vis/Nested-Table.html) | [ Directorio cronológico de muertes](/vis/Directorio-Eventos-Muertes.html) |
-| [Map by Municipality](/vis/Choropleth-Map-Municipality.html) |  |
+| [Map by Municipality](/vis/Choropleth-Map-Municipality.html) | [Mapa por Municipio](/vis/Choropleth-Map-Municipality-es.html) |
 | _Summaries by Municipality_ |  |
 | [La Paz](https://ultimateconsequences.github.io/municipalities/Dashboard_La-Paz.html), with street-level mapping |  |
 | [El Alto](https://ultimateconsequences.github.io/municipalities/Dashboard_El-Alto.html) |  |
