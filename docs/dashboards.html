@@ -75,9 +75,9 @@ ul.task-list li input[type="checkbox"] {
     }
 
     const options = {
-      valueNames: ['listing-filename','listing-file-modified',{ data: ['index'] },{ data: ['categories'] },{ data: ['listing-filename-sort'] },{ data: ['listing-file-modified-sort'] }],
+      valueNames: [{ data: ['index'] },{ data: ['categories'] }],
       
-      searchColumns: ["listing-filename","listing-file-modified"],
+      searchColumns: [],
     };
 
     window['quarto-listings'] = window['quarto-listings'] || {};
@@ -322,22 +322,6 @@ ul.task-list li input[type="checkbox"] {
 <h2 class="anchored" data-anchor-id="domains">Domains</h2>
 <div id="listing-domain-dashboards" class="quarto-listing quarto-listing-container-table">
 <div class="listing-actions-group">
-   <div class="input-group input-group-sm quarto-listing-sort">
-     <span class="input-group-text"><i class="bi bi-sort-down"></i></span>
-     <select id="listing-domain-dashboards-sort" class="form-select" aria-label="Order By" onchange="window['quarto-listings']['listing-domain-dashboards'].sort(this.options[this.selectedIndex].value, { order: this.options[this.selectedIndex].getAttribute('data-direction')})">
-       <option value="" disabled="" selected="" hidden="">Order By</option>
-       <option value="index" data-direction="asc">Default</option>
-         <option value="listing-filename-sort" data-direction="asc">
-          File Name
-        </option>
-         <option value="listing-file-modified-sort" data-direction="asc">
-          Modified - Oldest
-        </option>
-         <option value="listing-file-modified-sort" data-direction="desc">
-          Modified - Newest
-        </option>
-     </select>
-  </div>
     <div class="input-group input-group-sm quarto-listing-filter">
       <span class="input-group-text"><i class="bi bi-search"></i></span>
       <input type="text" class="search form-control" placeholder="Filter">
@@ -347,159 +331,9 @@ ul.task-list li input[type="checkbox"] {
 <table class="quarto-listing-table table">
 <thead>
 <tr>
-<th>
-<a class="sort" data-sort="listing-filename-sort" onclick="if (this.classList.contains('sort-asc')) { this.classList.add('sort-desc'); this.classList.remove('sort-asc') } else { this.classList.add('sort-asc'); this.classList.remove('sort-desc')} return false;">File Name</a>
-</th>
-<th>
-<a class="sort" data-sort="listing-file-modified-sort" onclick="if (this.classList.contains('sort-asc')) { this.classList.add('sort-desc'); this.classList.remove('sort-asc') } else { this.classList.add('sort-asc'); this.classList.remove('sort-desc')} return false;">Modified</a>
-</th>
 </tr>
 </thead>
 <tbody class="list">
-<tr data-index="0" data-listing-file-modified-sort="1690771654363" data-listing-filename-sort="Report_Coca_2023-04-16.html">
-<td>
-<a href="./ultimate-consequences/domains/Report_Coca_2023-04-16.html" class="filename listing-filename">Report_Coca_2023-04-16.html</a>
-</td>
-<td>
-<span class="listing-file-modified">7/30/23, 9:47:34 PM</span>
-</td>
-</tr>
-<tr data-index="1" data-listing-file-modified-sort="1690771654345" data-listing-filename-sort="Report_Contraband_2023-04-16.html">
-<td>
-<a href="./ultimate-consequences/domains/Report_Contraband_2023-04-16.html" class="filename listing-filename">Report_Contraband_2023-04-16.html</a>
-</td>
-<td>
-<span class="listing-file-modified">7/30/23, 9:47:34 PM</span>
-</td>
-</tr>
-<tr data-index="2" data-listing-file-modified-sort="1690771654342" data-listing-filename-sort="Report_Disabled_2023-04-16.html">
-<td>
-<a href="./ultimate-consequences/domains/Report_Disabled_2023-04-16.html" class="filename listing-filename">Report_Disabled_2023-04-16.html</a>
-</td>
-<td>
-<span class="listing-file-modified">7/30/23, 9:47:34 PM</span>
-</td>
-</tr>
-<tr data-index="3" data-listing-file-modified-sort="1690771654361" data-listing-filename-sort="Report_Drug trade_2023-04-16.html">
-<td>
-<a href="./ultimate-consequences/domains/Report_Drug trade_2023-04-16.html" class="filename listing-filename">Report_Drug trade_2023-04-16.html</a>
-</td>
-<td>
-<span class="listing-file-modified">7/30/23, 9:47:34 PM</span>
-</td>
-</tr>
-<tr data-index="4" data-listing-file-modified-sort="1690771654335" data-listing-filename-sort="Report_Economic policies_2023-04-16.html">
-<td>
-<a href="./ultimate-consequences/domains/Report_Economic policies_2023-04-16.html" class="filename listing-filename">Report_Economic policies_2023-04-16.html</a>
-</td>
-<td>
-<span class="listing-file-modified">7/30/23, 9:47:34 PM</span>
-</td>
-</tr>
-<tr data-index="5" data-listing-file-modified-sort="1690771654307" data-listing-filename-sort="Report_Education_2023-04-16.html">
-<td>
-<a href="./ultimate-consequences/domains/Report_Education_2023-04-16.html" class="filename listing-filename">Report_Education_2023-04-16.html</a>
-</td>
-<td>
-<span class="listing-file-modified">7/30/23, 9:47:34 PM</span>
-</td>
-</tr>
-<tr data-index="6" data-listing-file-modified-sort="1690771654299" data-listing-filename-sort="Report_Ethno-ecological_2023-04-16.html">
-<td>
-<a href="./ultimate-consequences/domains/Report_Ethno-ecological_2023-04-16.html" class="filename listing-filename">Report_Ethno-ecological_2023-04-16.html</a>
-</td>
-<td>
-<span class="listing-file-modified">7/30/23, 9:47:34 PM</span>
-</td>
-</tr>
-<tr data-index="7" data-listing-file-modified-sort="1690771654354" data-listing-filename-sort="Report_Gas Wars_2023-04-16.html">
-<td>
-<a href="./ultimate-consequences/domains/Report_Gas Wars_2023-04-16.html" class="filename listing-filename">Report_Gas Wars_2023-04-16.html</a>
-</td>
-<td>
-<span class="listing-file-modified">7/30/23, 9:47:34 PM</span>
-</td>
-</tr>
-<tr data-index="8" data-listing-file-modified-sort="1690771654365" data-listing-filename-sort="Report_Guerrilla_2023-04-16.html">
-<td>
-<a href="./ultimate-consequences/domains/Report_Guerrilla_2023-04-16.html" class="filename listing-filename">Report_Guerrilla_2023-04-16.html</a>
-</td>
-<td>
-<span class="listing-file-modified">7/30/23, 9:47:34 PM</span>
-</td>
-</tr>
-<tr data-index="9" data-listing-file-modified-sort="1690771654369" data-listing-filename-sort="Report_Labor_2023-04-16.html">
-<td>
-<a href="./ultimate-consequences/domains/Report_Labor_2023-04-16.html" class="filename listing-filename">Report_Labor_2023-04-16.html</a>
-</td>
-<td>
-<span class="listing-file-modified">7/30/23, 9:47:34 PM</span>
-</td>
-</tr>
-<tr data-index="10" data-listing-file-modified-sort="1690771654371" data-listing-filename-sort="Report_Local development_2023-04-16.html">
-<td>
-<a href="./ultimate-consequences/domains/Report_Local development_2023-04-16.html" class="filename listing-filename">Report_Local development_2023-04-16.html</a>
-</td>
-<td>
-<span class="listing-file-modified">7/30/23, 9:47:34 PM</span>
-</td>
-</tr>
-<tr data-index="11" data-listing-file-modified-sort="1690771654357" data-listing-filename-sort="Report_Mining_2023-04-16.html">
-<td>
-<a href="./ultimate-consequences/domains/Report_Mining_2023-04-16.html" class="filename listing-filename">Report_Mining_2023-04-16.html</a>
-</td>
-<td>
-<span class="listing-file-modified">7/30/23, 9:47:34 PM</span>
-</td>
-</tr>
-<tr data-index="12" data-listing-file-modified-sort="1690771654329" data-listing-filename-sort="Report_Municipal governance_2023-04-16.html">
-<td>
-<a href="./ultimate-consequences/domains/Report_Municipal governance_2023-04-16.html" class="filename listing-filename">Report_Municipal governance_2023-04-16.html</a>
-</td>
-<td>
-<span class="listing-file-modified">7/30/23, 9:47:34 PM</span>
-</td>
-</tr>
-<tr data-index="13" data-listing-file-modified-sort="1690771654383" data-listing-filename-sort="Report_Paramilitary_2023-04-16.html">
-<td>
-<a href="./ultimate-consequences/domains/Report_Paramilitary_2023-04-16.html" class="filename listing-filename">Report_Paramilitary_2023-04-16.html</a>
-</td>
-<td>
-<span class="listing-file-modified">7/30/23, 9:47:34 PM</span>
-</td>
-</tr>
-<tr data-index="14" data-listing-file-modified-sort="1690771654339" data-listing-filename-sort="Report_Partisan Politics_2023-04-16.html">
-<td>
-<a href="./ultimate-consequences/domains/Report_Partisan Politics_2023-04-16.html" class="filename listing-filename">Report_Partisan Politics_2023-04-16.html</a>
-</td>
-<td>
-<span class="listing-file-modified">7/30/23, 9:47:34 PM</span>
-</td>
-</tr>
-<tr data-index="15" data-listing-file-modified-sort="1690771654388" data-listing-filename-sort="Report_Peasant_2023-04-16.html">
-<td>
-<a href="./ultimate-consequences/domains/Report_Peasant_2023-04-16.html" class="filename listing-filename">Report_Peasant_2023-04-16.html</a>
-</td>
-<td>
-<span class="listing-file-modified">7/30/23, 9:47:34 PM</span>
-</td>
-</tr>
-<tr data-index="16" data-listing-file-modified-sort="1690771654350" data-listing-filename-sort="Report_Rural Land_2023-04-16.html">
-<td>
-<a href="./ultimate-consequences/domains/Report_Rural Land_2023-04-16.html" class="filename listing-filename">Report_Rural Land_2023-04-16.html</a>
-</td>
-<td>
-<span class="listing-file-modified">7/30/23, 9:47:34 PM</span>
-</td>
-</tr>
-<tr data-index="17" data-listing-file-modified-sort="1690771654319" data-listing-filename-sort="Report_Urban land_2023-04-16.html">
-<td>
-<a href="./ultimate-consequences/domains/Report_Urban land_2023-04-16.html" class="filename listing-filename">Report_Urban land_2023-04-16.html</a>
-</td>
-<td>
-<span class="listing-file-modified">7/30/23, 9:47:34 PM</span>
-</td>
-</tr>
 </tbody>
 
 </table>
@@ -546,164 +380,212 @@ No matching items
 </tr>
 </thead>
 <tbody class="list">
-<tr data-index="0" data-listing-file-modified-sort="1690771654445" data-listing-filename-sort="Dashboard_Achacachi.html">
+<tr data-index="0" data-listing-file-modified-sort="1691417388371" data-listing-filename-sort="Achacachi.html">
 <td>
-<a href="./ultimate-consequences/municipalities/Dashboard_Achacachi.html" class="filename listing-filename">Dashboard_Achacachi.html</a>
+<a href="./municipalities/Achacachi.html" class="filename listing-filename">Achacachi.html</a>
 </td>
 <td>
-<span class="listing-file-modified">7/30/23, 9:47:34 PM</span>
-</td>
-</tr>
-<tr data-index="1" data-listing-file-modified-sort="1690771654391" data-listing-filename-sort="Dashboard_Challapata.html">
-<td>
-<a href="./ultimate-consequences/municipalities/Dashboard_Challapata.html" class="filename listing-filename">Dashboard_Challapata.html</a>
-</td>
-<td>
-<span class="listing-file-modified">7/30/23, 9:47:34 PM</span>
+<span class="listing-file-modified">8/7/23, 9:09:48 AM</span>
 </td>
 </tr>
-<tr data-index="2" data-listing-file-modified-sort="1690771654407" data-listing-filename-sort="Dashboard_Chayanta.html">
+<tr data-index="1" data-listing-file-modified-sort="1691417388534" data-listing-filename-sort="Challapata.html">
 <td>
-<a href="./ultimate-consequences/municipalities/Dashboard_Chayanta.html" class="filename listing-filename">Dashboard_Chayanta.html</a>
+<a href="./municipalities/Challapata.html" class="filename listing-filename">Challapata.html</a>
 </td>
 <td>
-<span class="listing-file-modified">7/30/23, 9:47:34 PM</span>
-</td>
-</tr>
-<tr data-index="3" data-listing-file-modified-sort="1690771654440" data-listing-filename-sort="Dashboard_Chimore.html">
-<td>
-<a href="./ultimate-consequences/municipalities/Dashboard_Chimore.html" class="filename listing-filename">Dashboard_Chimore.html</a>
-</td>
-<td>
-<span class="listing-file-modified">7/30/23, 9:47:34 PM</span>
+<span class="listing-file-modified">8/7/23, 9:09:48 AM</span>
 </td>
 </tr>
-<tr data-index="4" data-listing-file-modified-sort="1690771654414" data-listing-filename-sort="Dashboard_Cochabamba.html">
+<tr data-index="2" data-listing-file-modified-sort="1691417388407" data-listing-filename-sort="Chayanta.html">
 <td>
-<a href="./ultimate-consequences/municipalities/Dashboard_Cochabamba.html" class="filename listing-filename">Dashboard_Cochabamba.html</a>
+<a href="./municipalities/Chayanta.html" class="filename listing-filename">Chayanta.html</a>
 </td>
 <td>
-<span class="listing-file-modified">7/30/23, 9:47:34 PM</span>
-</td>
-</tr>
-<tr data-index="5" data-listing-file-modified-sort="1690771654413" data-listing-filename-sort="Dashboard_El-Alto.html">
-<td>
-<a href="./ultimate-consequences/municipalities/Dashboard_El-Alto.html" class="filename listing-filename">Dashboard_El-Alto.html</a>
-</td>
-<td>
-<span class="listing-file-modified">7/30/23, 9:47:34 PM</span>
+<span class="listing-file-modified">8/7/23, 9:09:48 AM</span>
 </td>
 </tr>
-<tr data-index="6" data-listing-file-modified-sort="1690771654403" data-listing-filename-sort="Dashboard_Huanuni.html">
+<tr data-index="3" data-listing-file-modified-sort="1691417388462" data-listing-filename-sort="Chimore.html">
 <td>
-<a href="./ultimate-consequences/municipalities/Dashboard_Huanuni.html" class="filename listing-filename">Dashboard_Huanuni.html</a>
+<a href="./municipalities/Chimore.html" class="filename listing-filename">Chimore.html</a>
 </td>
 <td>
-<span class="listing-file-modified">7/30/23, 9:47:34 PM</span>
-</td>
-</tr>
-<tr data-index="7" data-listing-file-modified-sort="1690771654444" data-listing-filename-sort="Dashboard_La-Paz.html">
-<td>
-<a href="./ultimate-consequences/municipalities/Dashboard_La-Paz.html" class="filename listing-filename">Dashboard_La-Paz.html</a>
-</td>
-<td>
-<span class="listing-file-modified">7/30/23, 9:47:34 PM</span>
+<span class="listing-file-modified">8/7/23, 9:09:48 AM</span>
 </td>
 </tr>
-<tr data-index="8" data-listing-file-modified-sort="1690771654450" data-listing-filename-sort="Dashboard_Oruro.html">
+<tr data-index="4" data-listing-file-modified-sort="1691417388416" data-listing-filename-sort="Cochabamba.html">
 <td>
-<a href="./ultimate-consequences/municipalities/Dashboard_Oruro.html" class="filename listing-filename">Dashboard_Oruro.html</a>
+<a href="./municipalities/Cochabamba.html" class="filename listing-filename">Cochabamba.html</a>
 </td>
 <td>
-<span class="listing-file-modified">7/30/23, 9:47:34 PM</span>
-</td>
-</tr>
-<tr data-index="9" data-listing-file-modified-sort="1690771654405" data-listing-filename-sort="Dashboard_Porvenir.html">
-<td>
-<a href="./ultimate-consequences/municipalities/Dashboard_Porvenir.html" class="filename listing-filename">Dashboard_Porvenir.html</a>
-</td>
-<td>
-<span class="listing-file-modified">7/30/23, 9:47:34 PM</span>
+<span class="listing-file-modified">8/7/23, 9:09:48 AM</span>
 </td>
 </tr>
-<tr data-index="10" data-listing-file-modified-sort="1690771654434" data-listing-filename-sort="Dashboard_Potosi.html">
+<tr data-index="5" data-listing-file-modified-sort="1691417388471" data-listing-filename-sort="Coripata.html">
 <td>
-<a href="./ultimate-consequences/municipalities/Dashboard_Potosi.html" class="filename listing-filename">Dashboard_Potosi.html</a>
+<a href="./municipalities/Coripata.html" class="filename listing-filename">Coripata.html</a>
 </td>
 <td>
-<span class="listing-file-modified">7/30/23, 9:47:34 PM</span>
-</td>
-</tr>
-<tr data-index="11" data-listing-file-modified-sort="1690771654429" data-listing-filename-sort="Dashboard_Puerto-Villarroel.html">
-<td>
-<a href="./ultimate-consequences/municipalities/Dashboard_Puerto-Villarroel.html" class="filename listing-filename">Dashboard_Puerto-Villarroel.html</a>
-</td>
-<td>
-<span class="listing-file-modified">7/30/23, 9:47:34 PM</span>
+<span class="listing-file-modified">8/7/23, 9:09:48 AM</span>
 </td>
 </tr>
-<tr data-index="12" data-listing-file-modified-sort="1690771654431" data-listing-filename-sort="Dashboard_Sacaba.html">
+<tr data-index="6" data-listing-file-modified-sort="1691417388341" data-listing-filename-sort="El-Alto.html">
 <td>
-<a href="./ultimate-consequences/municipalities/Dashboard_Sacaba.html" class="filename listing-filename">Dashboard_Sacaba.html</a>
+<a href="./municipalities/El-Alto.html" class="filename listing-filename">El-Alto.html</a>
 </td>
 <td>
-<span class="listing-file-modified">7/30/23, 9:47:34 PM</span>
-</td>
-</tr>
-<tr data-index="13" data-listing-file-modified-sort="1690771654399" data-listing-filename-sort="Dashboard_Santa-Cruz-De-La-Sierra.html">
-<td>
-<a href="./ultimate-consequences/municipalities/Dashboard_Santa-Cruz-De-La-Sierra.html" class="filename listing-filename">Dashboard_Santa-Cruz-De-La-Sierra.html</a>
-</td>
-<td>
-<span class="listing-file-modified">7/30/23, 9:47:34 PM</span>
+<span class="listing-file-modified">8/7/23, 9:09:48 AM</span>
 </td>
 </tr>
-<tr data-index="14" data-listing-file-modified-sort="1690771654393" data-listing-filename-sort="Dashboard_Shinahota.html">
+<tr data-index="7" data-listing-file-modified-sort="1691417388554" data-listing-filename-sort="Entre-Rios.html">
 <td>
-<a href="./ultimate-consequences/municipalities/Dashboard_Shinahota.html" class="filename listing-filename">Dashboard_Shinahota.html</a>
+<a href="./municipalities/Entre-Rios.html" class="filename listing-filename">Entre-Rios.html</a>
 </td>
 <td>
-<span class="listing-file-modified">7/30/23, 9:47:34 PM</span>
-</td>
-</tr>
-<tr data-index="15" data-listing-file-modified-sort="1690771654438" data-listing-filename-sort="Dashboard_Sipe-Sipe.html">
-<td>
-<a href="./ultimate-consequences/municipalities/Dashboard_Sipe-Sipe.html" class="filename listing-filename">Dashboard_Sipe-Sipe.html</a>
-</td>
-<td>
-<span class="listing-file-modified">7/30/23, 9:47:34 PM</span>
+<span class="listing-file-modified">8/7/23, 9:09:48 AM</span>
 </td>
 </tr>
-<tr data-index="16" data-listing-file-modified-sort="1690771654416" data-listing-filename-sort="Dashboard_Unknown-Municipality.html">
+<tr data-index="8" data-listing-file-modified-sort="1691417388380" data-listing-filename-sort="Huanuni.html">
 <td>
-<a href="./ultimate-consequences/municipalities/Dashboard_Unknown-Municipality.html" class="filename listing-filename">Dashboard_Unknown-Municipality.html</a>
+<a href="./municipalities/Huanuni.html" class="filename listing-filename">Huanuni.html</a>
 </td>
 <td>
-<span class="listing-file-modified">7/30/23, 9:47:34 PM</span>
-</td>
-</tr>
-<tr data-index="17" data-listing-file-modified-sort="1690771654420" data-listing-filename-sort="Dashboard_Villa-Tunari.html">
-<td>
-<a href="./ultimate-consequences/municipalities/Dashboard_Villa-Tunari.html" class="filename listing-filename">Dashboard_Villa-Tunari.html</a>
-</td>
-<td>
-<span class="listing-file-modified">7/30/23, 9:47:34 PM</span>
+<span class="listing-file-modified">8/7/23, 9:09:48 AM</span>
 </td>
 </tr>
-<tr data-index="18" data-listing-file-modified-sort="1690771654410" data-listing-filename-sort="Dashboard_Yacuiba.html">
+<tr data-index="9" data-listing-file-modified-sort="1691417388376" data-listing-filename-sort="La-Paz.html">
 <td>
-<a href="./ultimate-consequences/municipalities/Dashboard_Yacuiba.html" class="filename listing-filename">Dashboard_Yacuiba.html</a>
+<a href="./municipalities/La-Paz.html" class="filename listing-filename">La-Paz.html</a>
 </td>
 <td>
-<span class="listing-file-modified">7/30/23, 9:47:34 PM</span>
+<span class="listing-file-modified">8/7/23, 9:09:48 AM</span>
 </td>
 </tr>
-<tr data-index="19" data-listing-file-modified-sort="1690771654397" data-listing-filename-sort="Dashboard_Yapacani.html">
+<tr data-index="10" data-listing-file-modified-sort="1691417388440" data-listing-filename-sort="Oruro.html">
 <td>
-<a href="./ultimate-consequences/municipalities/Dashboard_Yapacani.html" class="filename listing-filename">Dashboard_Yapacani.html</a>
+<a href="./municipalities/Oruro.html" class="filename listing-filename">Oruro.html</a>
 </td>
 <td>
-<span class="listing-file-modified">7/30/23, 9:47:34 PM</span>
+<span class="listing-file-modified">8/7/23, 9:09:48 AM</span>
+</td>
+</tr>
+<tr data-index="11" data-listing-file-modified-sort="1691417388431" data-listing-filename-sort="Palca.html">
+<td>
+<a href="./municipalities/Palca.html" class="filename listing-filename">Palca.html</a>
+</td>
+<td>
+<span class="listing-file-modified">8/7/23, 9:09:48 AM</span>
+</td>
+</tr>
+<tr data-index="12" data-listing-file-modified-sort="1691417388402" data-listing-filename-sort="Porvenir.html">
+<td>
+<a href="./municipalities/Porvenir.html" class="filename listing-filename">Porvenir.html</a>
+</td>
+<td>
+<span class="listing-file-modified">8/7/23, 9:09:48 AM</span>
+</td>
+</tr>
+<tr data-index="13" data-listing-file-modified-sort="1691417388394" data-listing-filename-sort="Potosi.html">
+<td>
+<a href="./municipalities/Potosi.html" class="filename listing-filename">Potosi.html</a>
+</td>
+<td>
+<span class="listing-file-modified">8/7/23, 9:09:48 AM</span>
+</td>
+</tr>
+<tr data-index="14" data-listing-file-modified-sort="1691417388377" data-listing-filename-sort="Puerto-Villarroel.html">
+<td>
+<a href="./municipalities/Puerto-Villarroel.html" class="filename listing-filename">Puerto-Villarroel.html</a>
+</td>
+<td>
+<span class="listing-file-modified">8/7/23, 9:09:48 AM</span>
+</td>
+</tr>
+<tr data-index="15" data-listing-file-modified-sort="1691417388396" data-listing-filename-sort="Sacaba.html">
+<td>
+<a href="./municipalities/Sacaba.html" class="filename listing-filename">Sacaba.html</a>
+</td>
+<td>
+<span class="listing-file-modified">8/7/23, 9:09:48 AM</span>
+</td>
+</tr>
+<tr data-index="16" data-listing-file-modified-sort="1691417388374" data-listing-filename-sort="San-Julian.html">
+<td>
+<a href="./municipalities/San-Julian.html" class="filename listing-filename">San-Julian.html</a>
+</td>
+<td>
+<span class="listing-file-modified">8/7/23, 9:09:48 AM</span>
+</td>
+</tr>
+<tr data-index="17" data-listing-file-modified-sort="1691417388400" data-listing-filename-sort="Santa-Cruz-De-La-Sierra.html">
+<td>
+<a href="./municipalities/Santa-Cruz-De-La-Sierra.html" class="filename listing-filename">Santa-Cruz-De-La-Sierra.html</a>
+</td>
+<td>
+<span class="listing-file-modified">8/7/23, 9:09:48 AM</span>
+</td>
+</tr>
+<tr data-index="18" data-listing-file-modified-sort="1691417388485" data-listing-filename-sort="Shinahota.html">
+<td>
+<a href="./municipalities/Shinahota.html" class="filename listing-filename">Shinahota.html</a>
+</td>
+<td>
+<span class="listing-file-modified">8/7/23, 9:09:48 AM</span>
+</td>
+</tr>
+<tr data-index="19" data-listing-file-modified-sort="1691417388545" data-listing-filename-sort="Sica-Sica.html">
+<td>
+<a href="./municipalities/Sica-Sica.html" class="filename listing-filename">Sica-Sica.html</a>
+</td>
+<td>
+<span class="listing-file-modified">8/7/23, 9:09:48 AM</span>
+</td>
+</tr>
+<tr data-index="20" data-listing-file-modified-sort="1691417388367" data-listing-filename-sort="Sipe-Sipe.html">
+<td>
+<a href="./municipalities/Sipe-Sipe.html" class="filename listing-filename">Sipe-Sipe.html</a>
+</td>
+<td>
+<span class="listing-file-modified">8/7/23, 9:09:48 AM</span>
+</td>
+</tr>
+<tr data-index="21" data-listing-file-modified-sort="1691417388556" data-listing-filename-sort="Sucre.html">
+<td>
+<a href="./municipalities/Sucre.html" class="filename listing-filename">Sucre.html</a>
+</td>
+<td>
+<span class="listing-file-modified">8/7/23, 9:09:48 AM</span>
+</td>
+</tr>
+<tr data-index="22" data-listing-file-modified-sort="1691417388417" data-listing-filename-sort="Unknown-Municipality.html">
+<td>
+<a href="./municipalities/Unknown-Municipality.html" class="filename listing-filename">Unknown-Municipality.html</a>
+</td>
+<td>
+<span class="listing-file-modified">8/7/23, 9:09:48 AM</span>
+</td>
+</tr>
+<tr data-index="23" data-listing-file-modified-sort="1691417388397" data-listing-filename-sort="Villa-Tunari.html">
+<td>
+<a href="./municipalities/Villa-Tunari.html" class="filename listing-filename">Villa-Tunari.html</a>
+</td>
+<td>
+<span class="listing-file-modified">8/7/23, 9:09:48 AM</span>
+</td>
+</tr>
+<tr data-index="24" data-listing-file-modified-sort="1691417388326" data-listing-filename-sort="Yacuiba.html">
+<td>
+<a href="./municipalities/Yacuiba.html" class="filename listing-filename">Yacuiba.html</a>
+</td>
+<td>
+<span class="listing-file-modified">8/7/23, 9:09:48 AM</span>
+</td>
+</tr>
+<tr data-index="25" data-listing-file-modified-sort="1691417388376" data-listing-filename-sort="Yapacani.html">
+<td>
+<a href="./municipalities/Yapacani.html" class="filename listing-filename">Yapacani.html</a>
+</td>
+<td>
+<span class="listing-file-modified">8/7/23, 9:09:48 AM</span>
 </td>
 </tr>
 </tbody>
