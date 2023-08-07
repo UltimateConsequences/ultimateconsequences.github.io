@@ -5,6 +5,7 @@ project:
     - images/*
     - Geocoding.html
     - project-documentation/*
+    - domains/*
     - municipalities/*
 
 execute:

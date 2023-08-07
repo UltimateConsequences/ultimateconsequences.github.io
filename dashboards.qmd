@@ -2,7 +2,7 @@
 title: Dashboards
 listing: 
   - id: domain-dashboards
-    contents: "/domains/Report_*.html"
+    contents: "/domains/*.html"
     type: table
   - id: municipality-dashboards
     contents: "/municipalities/*.html"

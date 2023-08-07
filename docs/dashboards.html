@@ -75,9 +75,9 @@ ul.task-list li input[type="checkbox"] {
     }
 
     const options = {
-      valueNames: [{ data: ['index'] },{ data: ['categories'] }],
+      valueNames: ['listing-filename','listing-file-modified',{ data: ['index'] },{ data: ['categories'] },{ data: ['listing-filename-sort'] },{ data: ['listing-file-modified-sort'] }],
       
-      searchColumns: [],
+      searchColumns: ["listing-filename","listing-file-modified"],
     };
 
     window['quarto-listings'] = window['quarto-listings'] || {};
@@ -322,6 +322,22 @@ ul.task-list li input[type="checkbox"] {
 <h2 class="anchored" data-anchor-id="domains">Domains</h2>
 <div id="listing-domain-dashboards" class="quarto-listing quarto-listing-container-table">
 <div class="listing-actions-group">
+   <div class="input-group input-group-sm quarto-listing-sort">
+     <span class="input-group-text"><i class="bi bi-sort-down"></i></span>
+     <select id="listing-domain-dashboards-sort" class="form-select" aria-label="Order By" onchange="window['quarto-listings']['listing-domain-dashboards'].sort(this.options[this.selectedIndex].value, { order: this.options[this.selectedIndex].getAttribute('data-direction')})">
+       <option value="" disabled="" selected="" hidden="">Order By</option>
+       <option value="index" data-direction="asc">Default</option>
+         <option value="listing-filename-sort" data-direction="asc">
+          File Name
+        </option>
+         <option value="listing-file-modified-sort" data-direction="asc">
+          Modified - Oldest
+        </option>
+         <option value="listing-file-modified-sort" data-direction="desc">
+          Modified - Newest
+        </option>
+     </select>
+  </div>
     <div class="input-group input-group-sm quarto-listing-filter">
       <span class="input-group-text"><i class="bi bi-search"></i></span>
       <input type="text" class="search form-control" placeholder="Filter">
@@ -331,9 +347,159 @@ ul.task-list li input[type="checkbox"] {
 <table class="quarto-listing-table table">
 <thead>
 <tr>
+<th>
+<a class="sort" data-sort="listing-filename-sort" onclick="if (this.classList.contains('sort-asc')) { this.classList.add('sort-desc'); this.classList.remove('sort-asc') } else { this.classList.add('sort-asc'); this.classList.remove('sort-desc')} return false;">File Name</a>
+</th>
+<th>
+<a class="sort" data-sort="listing-file-modified-sort" onclick="if (this.classList.contains('sort-asc')) { this.classList.add('sort-desc'); this.classList.remove('sort-asc') } else { this.classList.add('sort-asc'); this.classList.remove('sort-desc')} return false;">Modified</a>
+</th>
 </tr>
 </thead>
 <tbody class="list">
+<tr data-index="0" data-listing-file-modified-sort="1691431224335" data-listing-filename-sort="Coca.html">
+<td>
+<a href="./domains/Coca.html" class="filename listing-filename">Coca.html</a>
+</td>
+<td>
+<span class="listing-file-modified">8/7/23, 1:00:24 PM</span>
+</td>
+</tr>
+<tr data-index="1" data-listing-file-modified-sort="1691431224337" data-listing-filename-sort="Contraband.html">
+<td>
+<a href="./domains/Contraband.html" class="filename listing-filename">Contraband.html</a>
+</td>
+<td>
+<span class="listing-file-modified">8/7/23, 1:00:24 PM</span>
+</td>
+</tr>
+<tr data-index="2" data-listing-file-modified-sort="1691431224317" data-listing-filename-sort="Disabled.html">
+<td>
+<a href="./domains/Disabled.html" class="filename listing-filename">Disabled.html</a>
+</td>
+<td>
+<span class="listing-file-modified">8/7/23, 1:00:24 PM</span>
+</td>
+</tr>
+<tr data-index="3" data-listing-file-modified-sort="1691431224408" data-listing-filename-sort="Drug-Trade.html">
+<td>
+<a href="./domains/Drug-Trade.html" class="filename listing-filename">Drug-Trade.html</a>
+</td>
+<td>
+<span class="listing-file-modified">8/7/23, 1:00:24 PM</span>
+</td>
+</tr>
+<tr data-index="4" data-listing-file-modified-sort="1691431224386" data-listing-filename-sort="Economic-Policies.html">
+<td>
+<a href="./domains/Economic-Policies.html" class="filename listing-filename">Economic-Policies.html</a>
+</td>
+<td>
+<span class="listing-file-modified">8/7/23, 1:00:24 PM</span>
+</td>
+</tr>
+<tr data-index="5" data-listing-file-modified-sort="1691431224440" data-listing-filename-sort="Education.html">
+<td>
+<a href="./domains/Education.html" class="filename listing-filename">Education.html</a>
+</td>
+<td>
+<span class="listing-file-modified">8/7/23, 1:00:24 PM</span>
+</td>
+</tr>
+<tr data-index="6" data-listing-file-modified-sort="1691431224393" data-listing-filename-sort="Ethno-ecological.html">
+<td>
+<a href="./domains/Ethno-ecological.html" class="filename listing-filename">Ethno-ecological.html</a>
+</td>
+<td>
+<span class="listing-file-modified">8/7/23, 1:00:24 PM</span>
+</td>
+</tr>
+<tr data-index="7" data-listing-file-modified-sort="1691431224438" data-listing-filename-sort="Gas-Wars.html">
+<td>
+<a href="./domains/Gas-Wars.html" class="filename listing-filename">Gas-Wars.html</a>
+</td>
+<td>
+<span class="listing-file-modified">8/7/23, 1:00:24 PM</span>
+</td>
+</tr>
+<tr data-index="8" data-listing-file-modified-sort="1691431224466" data-listing-filename-sort="Guerrilla.html">
+<td>
+<a href="./domains/Guerrilla.html" class="filename listing-filename">Guerrilla.html</a>
+</td>
+<td>
+<span class="listing-file-modified">8/7/23, 1:00:24 PM</span>
+</td>
+</tr>
+<tr data-index="9" data-listing-file-modified-sort="1691431224400" data-listing-filename-sort="Labor.html">
+<td>
+<a href="./domains/Labor.html" class="filename listing-filename">Labor.html</a>
+</td>
+<td>
+<span class="listing-file-modified">8/7/23, 1:00:24 PM</span>
+</td>
+</tr>
+<tr data-index="10" data-listing-file-modified-sort="1691431224366" data-listing-filename-sort="Local-Development.html">
+<td>
+<a href="./domains/Local-Development.html" class="filename listing-filename">Local-Development.html</a>
+</td>
+<td>
+<span class="listing-file-modified">8/7/23, 1:00:24 PM</span>
+</td>
+</tr>
+<tr data-index="11" data-listing-file-modified-sort="1691431224464" data-listing-filename-sort="Mining.html">
+<td>
+<a href="./domains/Mining.html" class="filename listing-filename">Mining.html</a>
+</td>
+<td>
+<span class="listing-file-modified">8/7/23, 1:00:24 PM</span>
+</td>
+</tr>
+<tr data-index="12" data-listing-file-modified-sort="1691431224330" data-listing-filename-sort="Municipal-Governance.html">
+<td>
+<a href="./domains/Municipal-Governance.html" class="filename listing-filename">Municipal-Governance.html</a>
+</td>
+<td>
+<span class="listing-file-modified">8/7/23, 1:00:24 PM</span>
+</td>
+</tr>
+<tr data-index="13" data-listing-file-modified-sort="1691431224452" data-listing-filename-sort="Paramilitary.html">
+<td>
+<a href="./domains/Paramilitary.html" class="filename listing-filename">Paramilitary.html</a>
+</td>
+<td>
+<span class="listing-file-modified">8/7/23, 1:00:24 PM</span>
+</td>
+</tr>
+<tr data-index="14" data-listing-file-modified-sort="1691431224350" data-listing-filename-sort="Partisan-Politics.html">
+<td>
+<a href="./domains/Partisan-Politics.html" class="filename listing-filename">Partisan-Politics.html</a>
+</td>
+<td>
+<span class="listing-file-modified">8/7/23, 1:00:24 PM</span>
+</td>
+</tr>
+<tr data-index="15" data-listing-file-modified-sort="1691431224426" data-listing-filename-sort="Peasant.html">
+<td>
+<a href="./domains/Peasant.html" class="filename listing-filename">Peasant.html</a>
+</td>
+<td>
+<span class="listing-file-modified">8/7/23, 1:00:24 PM</span>
+</td>
+</tr>
+<tr data-index="16" data-listing-file-modified-sort="1691431224397" data-listing-filename-sort="Rural-Land.html">
+<td>
+<a href="./domains/Rural-Land.html" class="filename listing-filename">Rural-Land.html</a>
+</td>
+<td>
+<span class="listing-file-modified">8/7/23, 1:00:24 PM</span>
+</td>
+</tr>
+<tr data-index="17" data-listing-file-modified-sort="1691431224359" data-listing-filename-sort="Urban-Land.html">
+<td>
+<a href="./domains/Urban-Land.html" class="filename listing-filename">Urban-Land.html</a>
+</td>
+<td>
+<span class="listing-file-modified">8/7/23, 1:00:24 PM</span>
+</td>
+</tr>
 </tbody>
 
 </table>
