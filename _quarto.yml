@@ -5,6 +5,10 @@ project:
     - images/*
     - Geocoding.html
     - project-documentation/*
+    - municipalities/*
+
+execute:
+  freeze: auto  # re-render only when source changes
 
 website: 
   page-navigation: true
