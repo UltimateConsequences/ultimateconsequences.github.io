@@ -1,5 +1,7 @@
 ---
 title: "Data Analysis for When Does Lethal Repression Fail?"
+author: "Carwil Bjork-James"
+date: "1 August 2023"
 output:
   html_document:
     df_print: tibble
@@ -45,13 +47,13 @@ library(flextable)
 
 ```
 
-This page is supplementary material to Carwil Bjork-James's article, **"When does lethal repression fail? Unarmed militancy and backfire in Bolivia, 1982–2019,"** to be published in the Bolivian Studies Journal.
+This page is supplementary material to Carwil Bjork-James's article, **"When does lethal repression fail? Unarmed militancy and backfire in Bolivia, 1982–2019,"** to be published in the Journal of Latin American Studies.
 
 All queries and data tables referenced in the article are compiled in WLRF-Tables.Rmd in the Ultimate Consequences package on GitHub, using the database as constituted on May 12, 2022. A copy of the database on that date is archived for reproducibility of the analysis as `data/deaths-entries-2022-05-12.rds`. Access is currently available to researchers on request and will be incorporated into the forthcoming public release of the dataset. The queries, data tables, and code used to create them are published online at <https://ultimateconsequences.github.io/WLRF-Tables.html>.
 
 This document is designed to enable transparency and reproducibility of our research results. By specifying our search criteria for relevant cases, explaining exceptions, and embedding our analysis techniques in R scripts that use the database, we document our choices and create tools that can automatically update results when additional cases are uncovered, errors are corrected, or new information is brought to light. Archiving and versioning of the database and these tools allows other researchers to both reproduce our results, and test their robustness against different choices in coding or analysis.
 
-This document is divided into two parts. Unless you are attempting to reproduce our results from the dataset, feel free to skip over **Preparatory Code Blocks**, and begin reading at **Calculations and Queries Used in the Article**. Here is [a cleaner version of this page]() without the embedded code blocks.
+This document is divided into two parts. Unless you are attempting to reproduce our results from the dataset, feel free to skip over **Preparatory Code Blocks**, and begin reading at **Calculations and Queries Used in the Article**. The embedded code blocks can be read by clicking on the triangles next to the word "Code."
 
 For more information about the Ultimate Consequences research project, database, and future testimonial archive, head to [our Project Overview page](%5B%3Chttps://my.vanderbilt.edu/cbjorkjames/2021/09/ultimate-consequences-project-overview/%3E).
 
@@ -92,7 +94,7 @@ use.current.es.archive <- FALSE # This flag should be set to true when
                                 # es.filename does not have a date
 ```
 
-```{r import, echo=FALSE}
+```{r import, echo=FALSE, message=FALSE}
 library(here)
 
 source(here::here("src","01-import.R"), local = knitr::knit_global())
@@ -587,7 +589,7 @@ There were `r n_distinct(de$event_title)` events in the dataset before these fil
 
 ```{r visualize-three-death-filter, message=FALSE}
 #| label: visualize-three-death-filter
-#| tbl-cap: "Share of deaths by size of event"
+#| tbl-cap: "Share of large (n≥3) and small events by presidency"
 #| warning: false
 
 library(reactable)
@@ -612,6 +614,12 @@ eventshare.table <- def.count %>% ungroup() %>% group_by(pres_admin, small_flag)
       mutate(share_analyzed = percent(larger_event/(smaller_event + larger_event)))
 
 flextable(eventshare.table)
+```
+
+```{r visualize-three-death-second-table, message=FALSE}
+#| label: visualize-three-death-second-table
+#| tbl-cap: "Share of deaths by size of event"
+#| warning: false
 
 eventsize.table <- eventsize.table %>%
       mutate(event_count = death_count / n ) %>%
@@ -642,15 +650,15 @@ The tables and graphs that follow break down deaths included and excluded from t
 
 ```{r eventsize-plots, results='asis'}
 # Plot illustrating that large events predominate in nearly all years
-ggplot(def.count, aes(year, fill = (n<3) ) ) +
+ggplot(def.count, aes(year, fill = (n>=3) ) ) +
   geom_bar()
 
 # Plots illustrating that large events predominate in nearly all presidencies
-ggplot(def.count, aes(pres_admin, fill = (n<3) ) ) +
+ggplot(def.count, aes(pres_admin, fill = (n>=3) ) ) +
   geom_bar() +
   coord_flip()
 
-ggplot(def.count, aes(pres_admin, fill = (n<3) ) ) +
+ggplot(def.count, aes(pres_admin, fill = (n>=3) ) ) +
   geom_bar(position = "fill") +
   geom_hline(yintercept=0.5, linetype="dashed", color = "black") +
   coord_flip()
