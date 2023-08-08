@@ -55,6 +55,8 @@ website:
             text: "Map by Municipality"
           - href: vis/Choropleth-Map-Municipality-es.html
             text: "Mapa por Municipio"
+          - href: vis/Histogram-Domains.html
+            text: "Histogram by Year & Domain"            
           - dashboards.qmd
       - section: "Data Pages for Publications"
         contents:
