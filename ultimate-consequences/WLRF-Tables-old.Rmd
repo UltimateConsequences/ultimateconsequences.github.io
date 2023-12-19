@@ -1,7 +1,7 @@
 ---
 title: "Data Analysis for When Does Lethal Repression Fail?"
 author: "Carwil Bjork-James"
-date: "19 December 2023"
+date: "1 August 2023"
 output:
   html_document:
     df_print: tibble
@@ -49,13 +49,13 @@ library(flextable)
 
 This page is supplementary material to Carwil Bjork-James's article, **"When does lethal repression fail? Unarmed militancy and backfire in Bolivia, 1982–2019,"** to be published in the Journal of Latin American Studies.
 
-All queries and data tables referenced in the article are compiled in WLRF-Tables.Rmd in the Ultimate Consequences package on GitHub, using the database as constituted on May 12, 2022. A copy of the database on that date is archived for reproducibility of the analysis as `data/deaths-entries-2022-05-12.rds`. Access is currently available to researchers on request and will be incorporated into the forthcoming public release of the dataset. The queries, data tables, and code used to create them are published online at <https://ultimateconsequences.github.io/ultimate-consequences/WLRF-Tables.html>.
+All queries and data tables referenced in the article are compiled in WLRF-Tables.Rmd in the Ultimate Consequences package on GitHub, using the database as constituted on May 12, 2022. A copy of the database on that date is archived for reproducibility of the analysis as `data/deaths-entries-2022-05-12.rds`. Access is currently available to researchers on request and will be incorporated into the forthcoming public release of the dataset. The queries, data tables, and code used to create them are published online at <https://ultimateconsequences.github.io/WLRF-Tables.html>.
 
 This document is designed to enable transparency and reproducibility of our research results. By specifying our search criteria for relevant cases, explaining exceptions, and embedding our analysis techniques in R scripts that use the database, we document our choices and create tools that can automatically update results when additional cases are uncovered, errors are corrected, or new information is brought to light. Archiving and versioning of the database and these tools allows other researchers to both reproduce our results, and test their robustness against different choices in coding or analysis.
 
 This document is divided into two parts. Unless you are attempting to reproduce our results from the dataset, feel free to skip over **Preparatory Code Blocks**, and begin reading at **Calculations and Queries Used in the Article**. The embedded code blocks can be read by clicking on the triangles next to the word "Code."
 
-For more information about the Ultimate Consequences research project, database, and future testimonial archive, head to [our Project Overview page](https://ultimateconsequences.github.io/ultimate-consequences/About.html).
+For more information about the Ultimate Consequences research project, database, and future testimonial archive, head to [our Project Overview page](%5B%3Chttps://my.vanderbilt.edu/cbjorkjames/2021/09/ultimate-consequences-project-overview/%3E).
 
 # Preparatory Code Blocks
 
@@ -134,7 +134,6 @@ if(merge_regional_post_resignation){
                       event_title=="Senkata Massacre" ~ "Metro La Paz post-resignation (combined)",
                       event_title=="Metro Cochabamba post-resignation violence" ~ "Metro Cochabamba post-resignation (combined)",
                       event_title=="Sacaba massacre" ~ "Metro Cochabamba post-resignation (combined)",
-                      event_title=="Sacaba Massacre" ~ "Metro Cochabamba post-resignation (combined)",                      
                       TRUE ~ event_title
       ))
    cluster.2019.explanation <- paste(cluster.2019.explanation, "Post-resignation events grouped by place.", sep=" ")
@@ -158,7 +157,6 @@ if(merge_all_post_resignation)
   de <- de %>% mutate(event_title = case_when(
                       event_title=="Post-resignation protests" ~ "Post-resignation protests (inclusive)",
                       event_title=="Sacaba massacre" ~ "Post-resignation protests (inclusive)",
-                      event_title=="Sacaba Massacre" ~ "Post-resignation protests (inclusive)",
                       event_title=="Senkata Massacre" ~ "Post-resignation protests (inclusive)",
                       event_title=="Metro Cochabamba post-resignation (combined)" ~ "Post-resignation protests (inclusive)",
                       event_title=="Metro La Paz post-resignation (combined)" ~ "Post-resignation protests (inclusive)",
@@ -399,8 +397,6 @@ deathcount.columns<- c("n","n_state_perp", "n_state_perp_hi",
 red_pal <- function(x) rgb(colorRamp(c("#ffe0e0", "#ff3030", "#bb2020"))(x), maxColorValue = 255)
 brown_pal <- function(x) rgb(colorRamp(c("#EFEBE9", "#795548", "#3E2723"))(x), maxColorValue = 255)
 bluegray_pal <- function(x) rgb(colorRamp(c("#ECEFF1", "#607D8B", "#37474F"))(x), maxColorValue = 255)
-
-gray_pal <- function(x) rgb(colorRamp(c("#EFEFEF", "#8B8B8B", "#4F4F4F"))(x), maxColorValue = 255)
 alt_pal <- bluegray_pal
 
 # deaths columns formatting
@@ -697,31 +693,27 @@ campaign.events_joined3nq <- campaign.events_joined3q %>%
   select(id, everything())
 
 # Quadrant 1
-quadrant1id <- campaign.events_joined3nq %>%
+quadrant1 <- campaign.events_joined3q %>%
              filter(quadrant == 1) %>%
              select(-quadrant)
-quadrant1 <- quadrant1id %>% select(-id)
 
 # Quadrant 2
-quadrant2id <- campaign.events_joined3nq %>%
+quadrant2 <- campaign.events_joined3q %>%
              filter(quadrant == 2) %>%
              select(-quadrant)
-quadrant2 <- quadrant2id %>% select(-id)
 
 # Quadrant 2
-quadrant3id <- campaign.events_joined3nq %>%
+quadrant3 <- campaign.events_joined3q %>%
              filter(quadrant == 3) %>%
              select(-quadrant)
-quadrant3 <- quadrant3id %>% select(-id)
              
 # Quadrant 4
-quadrant4id <- campaign.events_joined3nq %>%
+quadrant4 <- campaign.events_joined3q %>%
              filter(quadrant == 4) %>%
              select(-quadrant)
-quadrant4 <- quadrant4id %>% select(-id)
 
 # 2019 grouping table
-crisis2019 <- campaign.events_joined3nq %>%
+crisis2019 <- campaign.events_joined3q %>%
              filter(year == 2019) 
 
 # verify no duplicate events
@@ -813,17 +805,15 @@ outcome_reactable <- function(outcomes){
           theme = nytimes(header_font_color = "#666666"),
           defaultPageSize=10,
           columns = list (
-            event_title = colDef (name="Situation", minWidth= 200,
+            event_title = colDef (name="Situation", minWidth= 240,
                                   style = list(fontWeight = "bold")),
             n = colDef (name="Num Deaths"),
             n_state_perp = colDef (name="State Perp"),
-            n_state_perp_hi = colDef (name="—", align = "left", 
-                                      format = colFormat(prefix = "– "), maxWidth=80),
+            n_state_perp_hi = colDef (name="—", align = "left", format = colFormat(prefix = "– ")),
             n_state_victim = colDef (name="State Victim"),
-            n_state_victim_hi = colDef (name="—", align = "left", 
-                                        format = colFormat(prefix = "– "), maxWidth=80),
+            n_state_victim_hi = colDef (name="—", align = "left", format = colFormat(prefix = "– ")),
             n_events = colDef (name="Num Events")
-            ),)
+            ))
    table
 }
 
@@ -863,15 +853,9 @@ cat(paste(datafiles_footer(es=TRUE),"\n\n",sep=""))
 ### Table I. Cases with deadly state repression and zero state victims
 
 ```{r echo=FALSE, warning=FALSE, fig.cap = "", results = 'asis'}
-q1wet <- wide_event_table(quadrant1id, max_larger = max_deaths_all_events) 
+wide_event_table(quadrant1, max_larger = max_deaths_all_events) 
 
-q1ot <- outcome_reactable(quadrant1_outcomes)
-
-# save_reactable_test(q1wet, "output/WLRF/Quadrant1a.png")
-# save_reactable_test(q1ot, "output/WLRF/Quadrant1b.png")
-
-q1wet
-q1ot
+outcome_reactable(quadrant1_outcomes)
 
 cat(paste(datafiles_footer(es=TRUE),"\n\n",sep=""))
 cat(paste(cluster.2019.explanation,"\n\n",sep=""))
@@ -880,7 +864,7 @@ cat(paste(cluster.2019.explanation,"\n\n",sep=""))
 ### Table II. Cases with deadly state repression and state victims
 
 ```{r echo=FALSE, warning=FALSE, fig.cap = "", results = 'asis'}
-wide_event_table(quadrant2id, max_larger = max_deaths_all_events)
+wide_event_table(quadrant2, max_larger = max_deaths_all_events)
 
 outcome_reactable(quadrant2_outcomes)
 
@@ -891,7 +875,7 @@ cat(paste(cluster.2019.explanation,"\n\n",sep=""))
 ### Table III. Cases without deadly state repression and with state victims
 
 ```{r echo=FALSE, warning=FALSE, fig.cap = "", results = 'asis'}
-wide_event_table(quadrant3id, max_larger = max_deaths_all_events)
+wide_event_table(quadrant3, max_larger = max_deaths_all_events)
 
 outcome_reactable(quadrant3_outcomes)
 
@@ -902,7 +886,7 @@ cat(paste(cluster.2019.explanation,"\n\n",sep=""))
 ### Table IV. Cases with no deadly state repression or state victims
 
 ```{r echo=FALSE, warning=FALSE, fig.cap = "", results = 'asis'}
-wide_event_table(quadrant4id, max_larger = max_deaths_all_events)
+wide_event_table(quadrant4, max_larger = max_deaths_all_events)
 
 # outcome_reactable(quadrant4_outcomes)
 
@@ -956,9 +940,7 @@ repression.events.Rabc <- filter(repression.events, ((hypotheses != "A") & (hypo
 outcome_table_clean <- function(event_table, num_outcomes) { 
   outcome_table(event_table, num_outcomes=num_outcomes) %>% 
                       filter(year =="-") %>% 
-                      select(-year, -protest_campaign, -outcome, 
-                             -outcome_summary, -protest_domain, -pres_admin) %>%
-                      select(-any_of(c("quadrant", "hypotheses")))
+                      select(-year, -protest_campaign, -outcome, -outcome_summary, -protest_domain, -pres_admin)
   }
 
 repression.events_outcomes <- outcome_table_clean(repression.events, num_outcomes=3) 
@@ -997,7 +979,8 @@ repression.events.leftlean_outcomes <- outcome_table_clean(repression.events.lef
 ```{r hypothesis-a, echo=FALSE, warning=FALSE, fig.cap = ""}
 wide_event_table(repression.events.A, max_larger = max_deaths_all_events)
 
-outcome_reactable(repression.events.A_outcomes)
+reactable(repression.events.A_outcomes,
+                    theme = nytimes())
 ```
 
 ### Cases matching... Hypothesis B
@@ -1005,7 +988,8 @@ outcome_reactable(repression.events.A_outcomes)
 ```{r hypothesis-b, echo=FALSE, warning=FALSE, fig.cap = ""}
 wide_event_table(repression.events.B, max_larger = max_deaths_all_events)
 
-outcome_reactable(repression.events.B_outcomes)
+reactable(repression.events.B_outcomes,
+                    theme = nytimes())
 ```
 
 ### Cases matching... Hypothesis C
@@ -1013,7 +997,8 @@ outcome_reactable(repression.events.B_outcomes)
 ```{r hypothesis-c, echo=FALSE, warning=FALSE, fig.cap = ""}
 wide_event_table(repression.events.C, max_larger = max_deaths_all_events)
 
-outcome_reactable(repression.events.C_outcomes)
+reactable(repression.events.C_outcomes,
+                    theme = nytimes())
 ```
 
 ### Political lean: Right
@@ -1021,7 +1006,8 @@ outcome_reactable(repression.events.C_outcomes)
 ```{r leanright, echo=FALSE, warning=FALSE, results = 'asis'}
 wide_event_table(repression.events.rightlean, max_larger = max_deaths_all_events)
 
-outcome_reactable(repression.events.rightlean_outcomes)
+reactable(repression.events.rightlean_outcomes,
+                    theme = nytimes())
 
 cat(paste(datafiles_footer(es=TRUE),"\n\n",sep=""))
 cat(paste(cluster.2019.explanation,"\n\n",sep=""))
@@ -1032,7 +1018,8 @@ cat(paste(cluster.2019.explanation,"\n\n",sep=""))
 ```{r leanleft, echo=FALSE, warning=FALSE, results = 'asis'}
 wide_event_table(repression.events.leftlean, max_larger = max_deaths_all_events)
 
-outcome_reactable(repression.events.leftlean_outcomes)
+reactable(repression.events.leftlean_outcomes,
+                    theme = nytimes())
 
 cat(paste(datafiles_footer(es=TRUE),"\n\n",sep=""))
 cat(paste(cluster.2019.explanation,"\n\n",sep=""))
@@ -1327,17 +1314,17 @@ The article text explores the results of smaller events corresponding to each hy
 
 ```{r hypothesis-event-tables, echo=FALSE, results='asis'}
 # following up on hypotheses
-cat("\n### Hypothesis A: Armed Actors\n")
+cat("\n### Hypothesis A: Armed Actors")
 
 campaign.events_joined_armedactor <- filter(campaign.events_joined2, (protest_domain == "Guerrilla")|(protest_domain == "Paramilitary")) %>% filter(n_state_perp>0)
 wide_event_table(campaign.events_joined_armedactor, max_larger = max_deaths_all_events)
 
-cat("\n### Hypothesis B: Coca Conflict\n")
+cat("\n### Hypothesis B: Coca Conflict")
 
 campaign.events_joined_coca <- filter(campaign.events_joined2, protest_domain == "Coca") %>% filter(n_state_perp>0)%>% filter(n_state_perp>0)
 wide_event_table(campaign.events_joined_coca, max_larger = max_deaths_all_events)
 
-cat("\n### Hypothesis C: Two-sided Partisan Conflicts\n")
+cat("\n### Hypothesis C: Two-sided Partisan Conflicts")
 
 campaign.events_joined_partisan <- filter(campaign.events_joined2, (protest_domain == "Partisan Politics") )%>% filter(n_state_perp>0)
 wide_event_table(campaign.events_joined_partisan, max_larger = max_deaths_all_events)

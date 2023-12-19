@@ -1,7 +1,7 @@
 ---
 title: "Data Analysis for When Does Lethal Repression Fail?"
 author: "Carwil Bjork-James"
-date: "19 December 2023"
+date: "1 August 2023"
 output:
   html_document:
     df_print: tibble
@@ -49,13 +49,13 @@ library(flextable)
 
 This page is supplementary material to Carwil Bjork-James's article, **"When does lethal repression fail? Unarmed militancy and backfire in Bolivia, 1982–2019,"** to be published in the Journal of Latin American Studies.
 
-All queries and data tables referenced in the article are compiled in WLRF-Tables.Rmd in the Ultimate Consequences package on GitHub, using the database as constituted on May 12, 2022. A copy of the database on that date is archived for reproducibility of the analysis as `data/deaths-entries-2022-05-12.rds`. Access is currently available to researchers on request and will be incorporated into the forthcoming public release of the dataset. The queries, data tables, and code used to create them are published online at <https://ultimateconsequences.github.io/ultimate-consequences/WLRF-Tables.html>.
+All queries and data tables referenced in the article are compiled in WLRF-Tables.Rmd in the Ultimate Consequences package on GitHub, using the database as constituted on May 12, 2022. A copy of the database on that date is archived for reproducibility of the analysis as `data/deaths-entries-2022-05-12.rds`. Access is currently available to researchers on request and will be incorporated into the forthcoming public release of the dataset. The queries, data tables, and code used to create them are published online at <https://ultimateconsequences.github.io/WLRF-Tables.html>.
 
 This document is designed to enable transparency and reproducibility of our research results. By specifying our search criteria for relevant cases, explaining exceptions, and embedding our analysis techniques in R scripts that use the database, we document our choices and create tools that can automatically update results when additional cases are uncovered, errors are corrected, or new information is brought to light. Archiving and versioning of the database and these tools allows other researchers to both reproduce our results, and test their robustness against different choices in coding or analysis.
 
 This document is divided into two parts. Unless you are attempting to reproduce our results from the dataset, feel free to skip over **Preparatory Code Blocks**, and begin reading at **Calculations and Queries Used in the Article**. The embedded code blocks can be read by clicking on the triangles next to the word "Code."
 
-For more information about the Ultimate Consequences research project, database, and future testimonial archive, head to [our Project Overview page](https://ultimateconsequences.github.io/ultimate-consequences/About.html).
+For more information about the Ultimate Consequences research project, database, and future testimonial archive, head to [our Project Overview page](%5B%3Chttps://my.vanderbilt.edu/cbjorkjames/2021/09/ultimate-consequences-project-overview/%3E).
 
 # Preparatory Code Blocks
 
@@ -401,7 +401,7 @@ brown_pal <- function(x) rgb(colorRamp(c("#EFEBE9", "#795548", "#3E2723"))(x), m
 bluegray_pal <- function(x) rgb(colorRamp(c("#ECEFF1", "#607D8B", "#37474F"))(x), maxColorValue = 255)
 
 gray_pal <- function(x) rgb(colorRamp(c("#EFEFEF", "#8B8B8B", "#4F4F4F"))(x), maxColorValue = 255)
-alt_pal <- bluegray_pal
+alt_pal <- gray_pal
 
 # deaths columns formatting
 deaths_column <- function(maxWidth = 60, class = NULL, maxValue = 100, ...) {
@@ -472,8 +472,18 @@ wide_event_table <- function(dataset, numerical.columns = deathcount.columns,
             n_collateral = colDef (name="Collateral",  defaultSortOrder = "desc"),
             n_nonconflict = colDef (name="Nonconflict", defaultSortOrder = "desc"),
             n_unconfirmed = colDef (name="Unconfirmed", defaultSortOrder = "desc"),
-            outcome = colDef (name="Outcome", defaultSortOrder = "asc",  minWidth=40, maxWidth = 80,
-                                style = function(value, index) {
+            outcome = colDef (name="Outcome", defaultSortOrder = "asc",  minWidth=40,
+                              maxWidth = 90,
+                              cell = function(value) {
+                                badge <- switch(
+                                  value,
+                                  "Movement" = "\U25B2",
+                                  "State"= "\U25BC",
+                                  " "
+                                ) 
+                                str_c(badge, value, sep=" ")
+                              },
+                              style = function(value, index) {
                                   if(is.na(dataset$outcome[index])){
                                     list(color = "black")
                                   }else if(dataset$outcome[index] == "Movement"){
@@ -490,7 +500,7 @@ wide_event_table <- function(dataset, numerical.columns = deathcount.columns,
                                   if(is.na(dataset$outcome[index])){
                                     
                                   }else if(dataset$outcome[index] == "Movement"){
-                                    list(background = "#54AE32") #green
+                                    list(color="#000000", background = "#54AE32") #green
                                   }else if(dataset$outcome[index] == "State"){
                                     list(background = "#F2806F") # soft red 
                                   }else if(dataset$outcome[index] == "None"){
@@ -542,14 +552,24 @@ wide_event_table <- function(dataset, numerical.columns = deathcount.columns,
             n_collateral = colDef (name="Collateral",  defaultSortOrder = "desc"),
             n_nonconflict = colDef (name="Nonconflict", defaultSortOrder = "desc"),
             n_unconfirmed = colDef (name="Unconfirmed", defaultSortOrder = "desc"),
-            outcome = colDef (name="Outcome", defaultSortOrder = "asc",  minWidth=40, maxWidth = 80,
+            outcome = colDef (name="Outcome", defaultSortOrder = "asc",  minWidth=40,
+                              maxWidth = 90,
+                              cell = function(value) {
+                                badge <- switch(
+                                  value,
+                                  "Movement" = "\U25B2",
+                                  "State"= "\U25BC",
+                                  " "
+                                ) 
+                                str_c(badge, value, sep=" ")
+                              },
                                 style = function(value, index) {
                                   if(is.na(dataset$outcome[index])){
-                                    list(color = "black")
+                                    list(color = "#333")
                                   }else if(dataset$outcome[index] == "Movement"){
-                                    list(color = "green")
+                                    list(color = "black")
                                   }else if(dataset$outcome[index] == "State"){
-                                    list(color = "red")
+                                    list(color = "black")
                                   }else if(dataset$outcome[index] == "None"){
                                     list(color = "grey")
                                   }
@@ -560,9 +580,9 @@ wide_event_table <- function(dataset, numerical.columns = deathcount.columns,
                                   if(is.na(dataset$outcome[index])){
                                     
                                   }else if(dataset$outcome[index] == "Movement"){
-                                    list(background = "#54AE32") #green
+                                    list(color="white", background = "#888") #green
                                   }else if(dataset$outcome[index] == "State"){
-                                    list(background = "#F2806F") # soft red 
+                                    list(color="white", background = "#333") # soft red 
                                   }else if(dataset$outcome[index] == "None"){
                                     list(background = "#D5D5D5") # light gray
                                   }
