@@ -1,5 +1,5 @@
 ---
-title: "Data Analysis for When Does Lethal Repression Fail?"
+title: "Data Analysis for “When Does Lethal Repression Fail?”"
 aliases:
   - ../WLRF-Tables.html
 author: "Carwil Bjork-James"
