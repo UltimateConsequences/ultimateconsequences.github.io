@@ -1,5 +1,7 @@
 ---
 title: "Data Analysis for When Does Lethal Repression Fail?"
+aliases:
+  - ../WLRF-Tables.html
 author: "Carwil Bjork-James"
 date: "4 February 2024"
 output:
@@ -49,7 +51,7 @@ library(flextable)
 
 This page is supplementary material to Carwil Bjork-James's article, **"When does lethal repression fail? Unarmed militancy and backfire in Bolivia, 1982–2021,"** to be published in the Journal of Latin American Studies.
 
-All queries and data tables referenced in the article are compiled in WLRF-Tables.Rmd in the Ultimate Consequences package on GitHub, using the database as constituted on May 12, 2022. A copy of the database on that date is archived for reproducibility of the analysis as `data/deaths-entries-2022-05-12.rds`. Access is currently available to researchers on request and will be incorporated into the forthcoming public release of the dataset. The queries, data tables, and code used to create them are published online at <https://ultimateconsequences.github.io/WLRF-Tables.html>.
+All queries and data tables referenced in the article are compiled in WLRF-Tables.Rmd in the Ultimate Consequences package on GitHub, using the database as constituted on May 12, 2022. A copy of the database on that date is archived for reproducibility of the analysis as `data/deaths-entries-2022-05-12.rds`. Access is currently available to researchers on request and will be incorporated into the forthcoming public release of the dataset. The queries, data tables, and code used to create them are published online at <https://ultimateconsequences.github.io/ultimate-consequences/WLRF-Tables.html>.
 
 This document is designed to enable transparency and reproducibility of our research results. By specifying our search criteria for relevant cases, explaining exceptions, and embedding our analysis techniques in R scripts that use the database, we document our choices and create tools that can automatically update results when additional cases are uncovered, errors are corrected, or new information is brought to light. Archiving and versioning of the database and these tools allows other researchers to both reproduce our results, and test their robustness against different choices in coding or analysis.
 
