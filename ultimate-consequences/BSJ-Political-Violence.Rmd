@@ -2,6 +2,8 @@
 title: "Bolivia Studies Journal Data Page"
 author: "Carwil Bjork-James"
 date: "11/16/2022"
+aliases:
+  - ../BSJ-Political-Violence.html
 output: 
   html_document
 ---

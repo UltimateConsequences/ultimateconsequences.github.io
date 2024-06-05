@@ -2,10 +2,10 @@
 title: Dashboards
 listing: 
   - id: domain-dashboards
-    contents: "ultimate-consequences/domains/Report_*.html"
+    contents: "/domains/*.html"
     type: table
   - id: municipality-dashboards
-    contents: "ultimate-consequences/municipalities/Dashboard_*.html"
+    contents: "/municipalities/*.html"
     type: table
 ---
   

@@ -1,0 +1,142 @@
+M       Choropleth-Map-Municipality-fullscreen.html
+R051    here-test/Alluvial2.Rmd CopyOfalluvial.Rmd
+A       CopyOfalluvial.html
+A       Domain_FlexDB_Test.Rmd
+R100    src/event-counts.R      Event_counts.R
+R095    Geocding.Rmd    Geocoding-spec1.Rmd
+A       Geocoding-spec1.html
+R100    src/archived/Geocoding-spec0.Rmd        Geocoding.Rmd
+A       Geocoding.html
+M       Municipal-Analysis.html
+M       Municipal-Analysis.qmd
+M       Municipal-Analysis_files/figure-html/population-treemap-2.png
+M       Municipal-Analysis_files/figure-html/population-treemap-3.png
+M       Presidency-Summary-Table.Rmd
+R100    output/Presidency-Summary-Table.docx    Presidency-Summary-Table.docx
+M       Project-Overview.Rmd
+M       Project-Overview.md
+R100    output/QBA-combined.docx        QBA-combined.docx
+R100    output/QBA-regional.docx        QBA-regional.docx
+R100    output/QBA.docx QBA.docx
+:...skipping...
+M       Choropleth-Map-Municipality-fullscreen.html
+R051    here-test/Alluvial2.Rmd CopyOfalluvial.Rmd
+A       CopyOfalluvial.html
+A       Domain_FlexDB_Test.Rmd
+R100    src/event-counts.R      Event_counts.R
+R095    Geocding.Rmd    Geocoding-spec1.Rmd
+A       Geocoding-spec1.html
+R100    src/archived/Geocoding-spec0.Rmd        Geocoding.Rmd
+A       Geocoding.html
+M       Municipal-Analysis.html
+M       Municipal-Analysis.qmd
+M       Municipal-Analysis_files/figure-html/population-treemap-2.png
+M       Municipal-Analysis_files/figure-html/population-treemap-3.png
+M       Presidency-Summary-Table.Rmd
+R100    output/Presidency-Summary-Table.docx    Presidency-Summary-Table.docx
+M       Project-Overview.Rmd
+M       Project-Overview.md
+R100    output/QBA-combined.docx        QBA-combined.docx
+R100    output/QBA-regional.docx        QBA-regional.docx
+R100    output/QBA.docx QBA.docx
+R100    output/Quadrant1a.png   Quadrant1a.png
+R100    output/Quadrant1b.png   Quadrant1b.png
+A       Rplots.pdf
+M       WLRF-Corrections.R
+M       WLRF-Tables-archive.Rmd
+A       WLRF-Tables-old.Rmd
+A       WLRF-Tables-old.html
+A       WLRF-Tables-print.html
+M       WLRF-Tables.Rmd
+M       WLRF-Tables.html
+A       alluvial.Rmd
+A       alluvial.html
+R068    src/archived/choropleth-map-trials.Rmd  choropleth-map-trials.Rmd
+R100    src/archived/choropleth-map-trials.html choropleth-map-trials.html
+R100    narratives/cochabamba-constitution-clash-zettlr.html    cochabamba-constitution-clash-zettlr.html
+R100    narratives/cochabamba-constitution-clash.commonmark.md  cochabamba-constitution-clash.commonmark.md
+R100    narratives/cochabamba-constitution-clash.html   cochabamba-constitution-clash.html
+R100    narratives/cochabamba-constitution-clash.md     cochabamba-constitution-clash.md
+R100    narratives/cochabamba-constitution-clash_files/libs/bootstrap/bootstrap-icons.css       cochabamba-constitution-clash_files/libs/bootstrap/bootstrap-icons.css
+R100    narratives/cochabamba-constitution-clash_files/libs/bootstrap/bootstrap-icons.woff      cochabamba-constitution-clash_files/libs/bootstrap/bootstrap-icons.woff
+R100    narratives/cochabamba-constitution-clash_files/libs/bootstrap/bootstrap.min.css cochabamba-constitution-clash_files/libs/bootstrap/bootstrap.min.css
+R100    narratives/cochabamba-constitution-clash_files/libs/bootstrap/bootstrap.min.js  cochabamba-constitution-clash_files/libs/bootstrap/bootstrap.min.js
+R100    narratives/cochabamba-constitution-clash_files/libs/clipboard/clipboard.min.js  cochabamba-constitution-clash_files/libs/clipboard/clipboard.min.js
+R100    narratives/cochabamba-constitution-clash_files/libs/quarto-html/anchor.min.js   cochabamba-constitution-clash_files/libs/quarto-html/anchor.min.js
+R100    narratives/cochabamba-constitution-clash_files/libs/quarto-html/popper.min.js   cochabamba-constitution-clash_files/libs/quarto-html/popper.min.js
+R100    narratives/cochabamba-constitution-clash_files/libs/quarto-html/quarto-syntax-highlighting.css  cochabamba-constitution-clash_files/libs/quarto-html/quarto-syntax-highlighting.css
+R100    narratives/cochabamba-constitution-clash_files/libs/quarto-html/quarto.js       cochabamba-constitution-clash_files/libs/quarto-html/quarto.js
+R100    narratives/cochabamba-constitution-clash_files/libs/quarto-html/tippy.css       cochabamba-constitution-clash_files/libs/quarto-html/tippy.css
+R100    narratives/cochabamba-constitution-clash_files/libs/quarto-html/tippy.umd.min.js        cochabamba-constitution-clash_files/libs/quarto-html/tippy.umd.min.js
+A       data/addresses-table-gg-2023-08-28.RDS
+M       data/addresses-table-gg.RDS
+M       data/bo-muni-dep.csv
+M       data/deaths-entries-temp.RDS
+M       data/event-status-2022-05-14.rds
+D       here-test/Alluvial2.html
+A       mihir-trials/bol_adm_gb2014_shp/BOL COD-AB 2020_05_19.pdf
+A       mihir-trials/bol_adm_gb2014_shp/bol_admbnda_adm0_gov_itos_2020514.CPG
+A       mihir-trials/bol_adm_gb2014_shp/bol_admbnda_adm0_gov_itos_2020514.dbf
+A       mihir-trials/bol_adm_gb2014_shp/bol_admbnda_adm0_gov_itos_2020514.prj
+A       mihir-trials/bol_adm_gb2014_shp/bol_admbnda_adm0_gov_itos_2020514.sbn
+A       mihir-trials/bol_adm_gb2014_shp/bol_admbnda_adm0_gov_itos_2020514.sbx
+A       mihir-trials/bol_adm_gb2014_shp/bol_admbnda_adm0_gov_itos_2020514.shp
+A       mihir-trials/bol_adm_gb2014_shp/bol_admbnda_adm0_gov_itos_2020514.shp.xml
+A       mihir-trials/bol_adm_gb2014_shp/bol_admbnda_adm0_gov_itos_2020514.shx
+A       mihir-trials/bol_adm_gb2014_shp/bol_admbnda_adm1_gov_2020514.CPG
+A       mihir-trials/bol_adm_gb2014_shp/bol_admbnda_adm1_gov_2020514.dbf
+A       mihir-trials/bol_adm_gb2014_shp/bol_admbnda_adm1_gov_2020514.prj
+A       mihir-trials/bol_adm_gb2014_shp/bol_admbnda_adm1_gov_2020514.sbn
+A       mihir-trials/bol_adm_gb2014_shp/bol_admbnda_adm1_gov_2020514.sbx
+A       mihir-trials/bol_adm_gb2014_shp/bol_admbnda_adm1_gov_2020514.shp
+A       mihir-trials/bol_adm_gb2014_shp/bol_admbnda_adm1_gov_2020514.shp.xml
+A       mihir-trials/bol_adm_gb2014_shp/bol_admbnda_adm1_gov_2020514.shx
+A       mihir-trials/bol_adm_gb2014_shp/bol_admbnda_adm2_gov_2020514.CPG
+A       mihir-trials/bol_adm_gb2014_shp/bol_admbnda_adm2_gov_2020514.dbf
+A       mihir-trials/bol_adm_gb2014_shp/bol_admbnda_adm2_gov_2020514.prj
+A       mihir-trials/bol_adm_gb2014_shp/bol_admbnda_adm2_gov_2020514.sbn
+A       mihir-trials/bol_adm_gb2014_shp/bol_admbnda_adm2_gov_2020514.sbx
+A       mihir-trials/bol_adm_gb2014_shp/bol_admbnda_adm2_gov_2020514.shp
+A       mihir-trials/bol_adm_gb2014_shp/bol_admbnda_adm2_gov_2020514.shp.xml
+A       mihir-trials/bol_adm_gb2014_shp/bol_admbnda_adm2_gov_2020514.shx
+A       mihir-trials/bol_adm_gb2014_shp/bol_admbnda_adm3_gov_2020514.CPG
+A       mihir-trials/bol_adm_gb2014_shp/bol_admbnda_adm3_gov_2020514.dbf
+A       mihir-trials/bol_adm_gb2014_shp/bol_admbnda_adm3_gov_2020514.prj
+A       mihir-trials/bol_adm_gb2014_shp/bol_admbnda_adm3_gov_2020514.sbn
+A       mihir-trials/bol_adm_gb2014_shp/bol_admbnda_adm3_gov_2020514.sbx
+A       mihir-trials/bol_adm_gb2014_shp/bol_admbnda_adm3_gov_2020514.shp
+A       mihir-trials/bol_adm_gb2014_shp/bol_admbnda_adm3_gov_2020514.shp.xml
+A       mihir-trials/bol_adm_gb2014_shp/bol_admbnda_adm3_gov_2020514.shx
+A       mihir-trials/bol_adm_gb2014_shp/bol_admbndl_admALL_gov_itos_2020514.CPG
+A       mihir-trials/bol_adm_gb2014_shp/bol_admbndl_admALL_gov_itos_2020514.dbf
+A       mihir-trials/bol_adm_gb2014_shp/bol_admbndl_admALL_gov_itos_2020514.prj
+A       mihir-trials/bol_adm_gb2014_shp/bol_admbndl_admALL_gov_itos_2020514.sbn
+A       mihir-trials/bol_adm_gb2014_shp/bol_admbndl_admALL_gov_itos_2020514.sbx
+A       mihir-trials/bol_adm_gb2014_shp/bol_admbndl_admALL_gov_itos_2020514.shp
+A       mihir-trials/bol_adm_gb2014_shp/bol_admbndl_admALL_gov_itos_2020514.shp.xml
+A       mihir-trials/bol_adm_gb2014_shp/bol_admbndl_admALL_gov_itos_2020514.shx
+A       mihir-trials/bol_adm_gb2014_shp/bol_admbndp_admALL_gov_itos_2020514.CPG
+A       mihir-trials/bol_adm_gb2014_shp/bol_admbndp_admALL_gov_itos_2020514.dbf
+A       mihir-trials/bol_adm_gb2014_shp/bol_admbndp_admALL_gov_itos_2020514.prj
+A       mihir-trials/bol_adm_gb2014_shp/bol_admbndp_admALL_gov_itos_2020514.sbn
+A       mihir-trials/bol_adm_gb2014_shp/bol_admbndp_admALL_gov_itos_2020514.sbx
+A       mihir-trials/bol_adm_gb2014_shp/bol_admbndp_admALL_gov_itos_2020514.shp
+A       mihir-trials/bol_adm_gb2014_shp/bol_admbndp_admALL_gov_itos_2020514.shp.xml
+A       mihir-trials/bol_adm_gb2014_shp/bol_admbndp_admALL_gov_itos_2020514.shx
+M       narratives/UltimateConsequences.json
+M       presidency-charts.Rmd
+M       presidency-charts.html
+R100    src/repression-period-experiment.R      repression-period-experiment.R
+M       src/01-import-de-pt.R
+M       src/01-import.R
+M       src/ggmap-tools.R
+M       src/install-common-packages.R
+M       src/install-packages.R
+A       src/troubleshoot-googlesheet.R
+M       src/update-versioned-archive.R
+R100    src/state-victim-comparison.R   state-victim-comparison.R
+R100    src/tile-plot-experiments-recolored.R   tile-plot-experiments-recolored.R
+R100    src/tile-plot-experiments.R     tile-plot-experiments.R
+M       variable-consistency.Rmd
+R100    src/waffle-chart-experiments.R  waffle-chart-experiments.R
+R100    output/~$QBA.docx       ~$QBA.docx
