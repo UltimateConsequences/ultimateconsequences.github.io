@@ -77,7 +77,7 @@ mixedToFloat <- function(x){
   ifelse(is.integer,  as.numeric(sapply(numbers, `[`, 1)),
          ifelse(is.fraction, as.numeric(sapply(numbers, `[`, 1)) /
                   as.numeric(sapply(numbers, `[`, 2)),
-                as.numeric(sapply(numbers, `[`, 1)) +
+                  as.numeric(sapply(numbers, `[`, 1)) +
                   as.numeric(sapply(numbers, `[`, 2)) /
                   as.numeric(sapply(numbers, `[`, 3))))
 }

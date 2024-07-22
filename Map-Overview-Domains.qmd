@@ -1,0 +1,209 @@
+---
+title: "Overview Map by Protest Domain (beta test)"
+format: 
+  dashboard:
+    logo: images/Bolivia-UC-icon-312px.png
+---
+
+```{r setup, echo=FALSE, include=FALSE}
+library(here)
+library(tidyverse)
+library(sf)
+library(mapview)
+library(leafpop)
+
+source(here::here("src","00-import-settings-local.R"), local = knitr::knit_global())
+
+source(here::here("src","01-import.R"), local = knitr::knit_global())
+source(here::here("src","render-age.R"), local = knitr::knit_global()) # should be included in 
+ # naming source file
+
+de.imported <- de
+
+# def <- de %>%
+#   filter(is.na(unconfirmed) | unconfirmed != TRUE) %>%
+#   filter(is.na(intentionality) | intentionality != "Collateral") %>%
+#   filter(is.na(intentionality) | !str_detect(intentionality, "Nonconflict"))
+# 
+# de.confirmed <- def
+# de <- de.confirmed # use the confirmed deaths for this page
+
+source(here::here("src","03-factoring-standard.R"), local = knitr::knit_global())
+source(here::here("src","colors-material-design.R"), local = knitr::knit_global())
+source(here::here("src", "naming-functions.R"))
+
+de <- add_nameline(de)
+
+de <- de %>% mutate(age_text = render_age(dec_age))
+
+de <- add_dateline(de)
+
+```
+
+```{r location-data}
+library(tmaptools)
+
+bolivia.bb <- bb (x="Bolivia")
+bolivia.center.long <- unname((bolivia.bb$xmin + bolivia.bb$xmax)/2)
+bolivia.center.lat <- unname((bolivia.bb$ymin + bolivia.bb$ymax)/2)
+
+
+source(here::here("src", "here_filename.R"))
+
+dal.filename <- "data/geocode/addresses-located.RDS"
+dcl.filename <- "data/geocode/communities-located.RDS"
+dtl.filename <- "data/geocode/towns-located.RDS"
+
+add_variable <- function(dataframe, lookup_data, key_var = id_indiv, add_var = protest_domain){
+  key_var <- enquo(key_var)
+  add_var <- enquo(add_var)
+  dataframe %>%
+    filter(!is.na(!!key_var)) %>%
+    left_join(select(lookup_data, !!key_var, !!add_var))
+}
+# possible improvement… warn if variable to be added is already in dataframe
+
+add_variables <- function(dataframe, lookup_data, key_var = id_indiv, ...){
+  key_var <- enquo(key_var)
+  dataframe %>%
+    filter(!is.na(!!key_var)) %>%
+    left_join(select(lookup_data, !!key_var, ...))
+}
+# possible improvement… warn if variable to be added is already in dataframe
+
+de.address.located <- readRDS(here_filename(dal.filename)) 
+de.community.located <- readRDS(here_filename(dcl.filename)) 
+de.town.located <- readRDS(here_filename(dtl.filename)) 
+
+# # de.address.located <- left_join(de.address.located, de %>% select(id_indiv, protest_domain))
+# de.address.located <- de.address.located %>% add_variable(de, protest_domain)
+# de.community.located <- de.community.located %>% add_variable(de, protest_domain)
+# de.town.located <- de.town.located %>% add_variable(de, protest_domain)
+
+#combine the map
+de.located <- bind_rows(de.address.located, de.community.located, de.town.located) %>%
+              arrange(id_indiv)
+# de.located <- de.located %>% add_variable(de, key_var = id_indiv, protest_domain)
+# de.located <- de.located %>% add_variables(de, key_var = id_indiv, 
+#                                            dec_affiliation:weapon,
+#                                            address:department, 
+#                                            pres_admin:protest_domain,
+#                                            state_responsibility,
+#                                            age:incident_line)
+de.add <- de %>% select(-event_title, -year) # merge everything except these
+de.located <- de.located %>% add_variables(de, key_var = id_indiv, 
+                                           dec_firstname:sr_text,
+                                           age:incident_line)
+```
+
+## Page Under Development {height=10%}
+
+This interactive map is currently under development: remaining work includes verification and refining of automatically geocoded points, refining of the pop-up data panels, and indication of which deaths shown are listed as "unconfirmed" in the database. Do not link to this page as its final address may change. Not for citation.
+
+## Overview Map {height=90%}
+
+```{r overview-leaflet}
+source(here::here("src", "map-functions.R"))
+library(leaflet)
+
+de.located <- de.located %>% filter(!is.na(lat))
+
+de.located <- de.located %>% mutate(label_text=paste("<h3>", event_title, "</h3><br>", 
+                                                      name_line, "<br>",
+                                                      "<b>Affiliation:</b> ", dec_affiliation, "<br>", 
+                                                      sr_text, " | ", intentionality, "<br>", 
+                                                      "<b>Event:</b> ", event_title, "<br>", 
+                                                      "<b>Cause of death:</b> ", cause_death, "<br>",
+                                                      incident_line, "<br>",
+                                                      "<b>Location:</b> ", location, sep=""))
+
+protest_domain.colors <- assign_protest_domain.colors()
+pal <- colorFactor(protest_domain.colors, domain = protest_domain.grouped)
+pal2 <- function(domain){
+  protest_domain.colors[[domain]]
+}
+
+pal3 <- function(state_responsibility){
+  state_resp.colors[[state_responsibility]]
+}
+
+de.located <- de.located %>% mutate(sr_color = sapply(state_responsibility, pal3))
+
+# de.located.overlaps <- de.located %>% 
+#                          group_by(lat, lon) %>% 
+#                          mutate(duplicated = n() > 1) %>%
+#                          ungroup()
+# 
+# de.located <- de.located.overlaps %>% 
+#               mutate(lon = (duplicated==TRUE)
+#
+# This would be enough overlap
+#                    ~jitter(lon, factor = 1/6), ~jitter(lat, factor = 1/6),
+
+ # de.located1 <- de.located                  
+ # de.massacre <- de.located %>% filter(str_detect(event_title, "assacre"))  
+ # de.located <- de.massacre
+ #
+ # de.located <- de.located1
+                     
+m <- leaflet(de.located) %>% addProviderTiles(providers$CartoDB.Voyager,
+                                              options = tileOptions(maxZoom = 16)) %>% 
+  setView(bolivia.center.long, bolivia.center.lat, zoom = 7) %>% 
+  addCircleMarkers(group = "Domain Separated",
+                   ~lon, ~lat,
+                   label = ~event_title,
+                   popup = ~label_text,
+                   weight = 3, radius=6,
+                   color=~lapply(de.located$protest_domain, pal2), stroke = TRUE, fillOpacity = 0.25
+                   ) %>%
+  addCircleMarkers(group = "Domain Clustered",
+                   clusterOptions = markerClusterOptions(maxClusterRadius = 20,
+                                                         spiderfyDistanceMultiplier = 1.7,
+                                                         singleMarkerMode = TRUE),
+                   ~lon, ~lat,
+                   label = ~event_title,
+                   popup = ~label_text,
+                   weight = 3, radius=6,
+                   color=~lapply(de.located$protest_domain, pal2),
+                   stroke = TRUE,
+                   fillOpacity = 0.3) %>%
+    addCircleMarkers(group = "Responsibility Separated",
+                   ~lon, ~lat, 
+                   label = ~event_title, 
+                   popup = ~label_text,
+                   weight = 3, radius=6, 
+                   color = ~sr_color, 
+                   stroke = TRUE, fillOpacity = 0.25
+                   ) %>%
+   addCircleMarkers(group = "Responsibility Clustered",
+                   clusterOptions = markerClusterOptions(maxClusterRadius = 20,
+                                                         spiderfyDistanceMultiplier = 1.7,
+                                                         singleMarkerMode = TRUE),
+                   ~lon, ~lat, 
+                   label = ~event_title, 
+                   popup = ~label_text,
+                   weight = 3, radius=6, 
+                   color = ~sr_color, 
+                   stroke = TRUE, fillOpacity = 0.25
+                   ) %>%
+  addLegend(
+                     position = "bottomright",
+                     colors = protest_domain.colors,
+                     labels = protest_domain.grouped, 
+                     opacity = 1,
+                     title = "Protest Domain"
+                   )  %>%
+    addLegend(
+                     position = "bottomleft",
+                     colors = state_resp.colors,
+                     labels = sr_levels, 
+                     opacity = 1,
+                     title = "Protest Domain"
+                   )  %>%
+  addLayersControl(baseGroups = c("Domain Clustered", "Domain Separated", 
+                                  "Responsibility Separated", "Responsibility Clustered"),
+                   options = layersControlOptions(collapsed = FALSE)
+                   ) 
+
+m
+```

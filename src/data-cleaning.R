@@ -51,27 +51,134 @@ assign_state_perpetrator_levels <- function(dataframe, simplify=FALSE){
   return(de)
 }
 
-combine_dates <- function(dataframe, incl_laterdate=FALSE){
-  dataframe <- mutate(dataframe,
-                      date = case_when(
-                        # Manage dates where we know year (and possibly month) but not the whole date
-                        # These dates are estimates in the middle of the year or month
-                        (is.na(day) &
-                           is.na(month) & !is.na(year)) ~ as.Date(str_glue("{year}-06-30")),
-                        (is.na(day) &
-                           !is.na(month) &
-                           !is.na(year)) ~ as.Date(str_glue("{year}-{month}-15")),
-                        (is.na(year)) ~ NA,
-                        # Normal date are just pasted
-                        TRUE ~ (paste(year, month, day, sep = "-") %>%
-                                  ymd() %>% as.Date())
-                      ),
-                      date_text = format(date, "%Y-%m-%d")) 
+assign_state_responsibility_levels <- function(dataframe, simplify=FALSE){
+  de <- dataframe
+  de <- mutate(de, sr_text = state_responsibility) %>% # add a new column with original text in "state_responsibility"
+    relocate(sr_text, .after=state_responsibility)
+  
+  de <- de %>% mutate(state_responsibility = case_when(    # overwrite the state responsibility for unintentional cases
+    intentionality == "Incidental" ~ "Incidental",
+    intentionality == "Conflict Accident" ~ "Accidental",
+    TRUE ~ state_responsibility))
+  
+  de$state_responsibility <- fct_explicit_na(de$state_responsibility, na_level = "Unknown")
+  if (simplify){
+    de$state_responsibility <- fct_collapse(de$state_responsibility, 
+                                            Perpetrator = c("State perpetrator", "State likely perpetrator", 
+                                                            "State perpetrator, State victim refusing orders", 
+                                                            "State perpetrator, State victim in mutiny",
+                                                            "State indirect perpetrator"),
+                                            Involved = c("State involved", "Political victim", 
+                                                         "Political victim / political perpetrator",
+                                                         "Political victim / unknown perpetrator",
+                                                         "Possibly state involved"),
+                                            Victim = c("State victim",  
+                                                       "State victim, State perpetrator in mutiny"), 
+                                            Separate = c("Separate from state"),
+                                            Unintentional = c("Incidental", "Accidental"),
+                                            Unknown  = c("Unknown", "Unclear", "Disputed") )
+    
+    sr_levels <<- c("Perpetrator", "Victim", "Involved", "Separate", "Unintentional", "Unknown")
+    de$state_responsibility <- fct_relevel(de$state_responsibility, sr_levels)
+  }
+  return(de)
+}  
+
+library(incase)
+ 
+estimated_date_string <- function(year, month, day){
+  date_string <- in_case(
+    (is.na(year)) ~ NA,
+    (is.na(day) & is.na(month) & !is.na(year)) ~ str_glue("{year}-06-30"),
+    (is.na(day) & !is.na(month) & !is.na(year)) ~ str_glue("{year}-{month}-15"),
+    TRUE ~ paste(year, month, day, sep = "-")
+  ) 
+  
+  return(date_string)
+}
+
+combine_dates <- function(dataframe, incl_laterdate=FALSE, date_at_front=FALSE){
+  dataframe <- dataframe %>% 
+                 mutate(date_text = estimated_date_string(year, month, day)) %>%
+                 mutate(date = as.Date(ymd(date_text)) )
+  
   
   if(incl_laterdate & ("later_day" %in% colnames(dataframe))){
     dataframe <- mutate(dataframe,
                         laterdate = (paste(later_year, later_month, later_day, sep="-") %>% 
                                        ymd() %>% as.Date()))
   }
+  if(date_at_front){
+    dataframe <- dataframe %>% relocate(event_title, date) %>% 
+                               relocate(year, month, day, .after = last_col())
+  }
+  
+  dataframe
+}
+
+assign_location_precision_levels <- function(dataframe){
+  location_precision_levels <<- c(
+    "address", "poi_small", "intersection", 
+    "block", "poi_large", "road", "community", 
+    "town", "rural_zone", 
+    "municipality", "province", 
+    "region", "department")
+  
+  # This complicated construction ensures that no errors will be generated if there is no location_precision column
+  if (!("location_precision" %in% colnames(dataframe))) return(dataframe)
+  
+  dataframe <- dataframe %>% mutate(location_precision = factor(location_precision, levels=location_precision_levels))
+  return(dataframe)
+}
+
+string_to_listcase <- function(string) {
+  string %>% str_replace(",", ".") %>% 
+    str_to_sentence() %>% 
+    str_replace("\\.", ",")
+  }
+
+assign_protest_domain_levels <- function(dataframe, na.level = "Unknown"){
+  # This complicated construction ensures that no errors will be generated if there is no location_precision column
+  if (!("protest_domain" %in% colnames(dataframe))) return(dataframe)
+  
+  # factor protest_domain
+  protest_domain.grouped <<- c( 
+    "Gas wars",                         # Economic
+    "Economic policies",
+    "Labor",
+    "Education",
+    "Mining",
+    "Coca",                             # Rural
+    "Peasant",
+    "Rural land",
+    "Rural land, Partisan politics",
+    "Ethno-ecological",
+    "Drug trade",                       # Criminalized
+    "Contraband",
+    "Local development",                # Local
+    "Municipal governance",
+    "Partisan politics",                # (solo)
+    "Disabled",                         # (solo)
+    "Guerrilla",                        # Armed actors
+    "Paramilitary",
+    "Urban land",
+    "Unknown")                       # (solo)
+  
+  if(is.character(dataframe$protest_domain))
+  {
+    dataframe <- dataframe %>% 
+                mutate(protest_domain = string_to_listcase(protest_domain))
+  }
+  dataframe$protest_domain <- fct_explicit_na(dataframe$protest_domain, na_level = na.level)
+  dataframe$protest_domain <- fct_relevel(dataframe$protest_domain, protest_domain.grouped)
+  return(dataframe)
+}
+
+# This function produces a single name string
+combine_names <- function(dataframe, unknown_string = "?"){
+  dataframe <- dataframe %>% 
+    mutate(name = str_c(str_replace_na(dec_firstname, replacement = unknown_string),
+                        str_replace_na(dec_surnames, replacement = unknown_string),
+                        sep=" "))
   dataframe
 }

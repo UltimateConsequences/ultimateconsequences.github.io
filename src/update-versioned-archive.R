@@ -7,11 +7,13 @@
 # 1. granularity is one archive per day 
 # 2. Assumes that the most recent dated version is equal to the current version
 #    (as it should be if created by update_versioned_archive())
-# 3. Curretly there is no metadata stored other than the date in the filename
+# 3. Currently there is no metadata stored other than the date in the filename
 # 4. We haven't yet created any functional tools to load and verify data from 
 #    these RDS files, though read_rds() may be adequate.
 
 # function to add the current date to a filepath before the extension
+
+library(here)
 
 append_current_date <- function(filename="filename.ext"){
   library("tools")
@@ -27,31 +29,36 @@ append_current_date <- function(filename="filename.ext"){
 # This function returns the name of the dated file, allowig it to be used
 # in the reproducibility metadata for any and all charts and reports.
 
-update_versioned_archive <- function(df, filename="filename.ext") {
-  library("tools")
+update_versioned_archive <- function(df, filename="data/filename.ext") {
+  library(tools)
   library(dplyr)
   library(janitor)
-  if (!file.exists(filename)) {
+
+  path <- dirname(filename)
+  filename_base <- basename(filename)
+  filename_full <- here(path, filename_base)
+    
+  if (!file.exists(filename_full)) {
     # if there is no archive of the file yet, create a first archive
-    write_rds(df, file=filename) 
-    filename.dated <- append_current_date(filename)
+    write_rds(df, file=filename_full)
+    filename.dated <- append_current_date(filename_full)
     write_rds(df, file=filename.dated)
   } else{
     # otherwise do a comparison with the saved version
-    df.saved<-read_rds(filename)
+    df.saved<-read_rds(filename_full)
     if(isTRUE(all_equal(df, df.saved))) {
         # if the newly imported df is the same as the saved one, do nothing.
         # 
         # and also save the filename of newest version  
-        df.filelist <- file.info(list.files(dirname(filename), 
-                                            pattern = paste(basename(file_path_sans_ext(filename)), "-", sep=""), 
+        df.filelist <- file.info(list.files(dirname(filename_full), 
+                                            pattern = paste(basename(file_path_sans_ext(filename_base)), "-", sep=""), 
                                             full.names = T)) 
         filename.dated <- rownames(df.filelist)[which.max(df.filelist$mtime)]
     }else{
       # if the newly imported dataframe is different, overwrite the current file
-      write_rds(df, file=filename)
+      write_rds(df, file=filename_full)
       # and also save a copy with today's date
-      filename.dated <- append_current_date(filename)
+      filename.dated <- append_current_date(filename_full)
       write_rds(df, file=filename.dated) 
     }
     rm(df.saved) # and remove the old copy from memory

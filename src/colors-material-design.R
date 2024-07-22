@@ -66,48 +66,50 @@ mat_color_hex['green-100']
 # protest_domain.colors - an associated color assignment
 #
 protest_domain.grouped <- c( 
-  "Gas Wars",                         # Economic
+  "Gas wars",                         # Economic
   "Economic policies",
   "Labor",
   "Education",
   "Mining",
   "Coca",                             # Rural
   "Peasant",
-  "Rural Land",
-  "Rural Land, Partisan Politics",
+  "Rural land",
+  "Rural land, Partisan politics",
   "Ethno-ecological",
   "Drug trade",                       # Criminalized
   "Contraband",
   "Local development",                # Local
   "Municipal governance",
-  "Partisan Politics",                # (solo)
+  "Partisan politics",                # (solo)
   "Disabled",                         # (solo)
   "Guerrilla",                        # Armed actors
   "Paramilitary",
   "Urban land",
   "Unknown")                       # (solo)
 
-protest_domain.colors <- c( 
-  "Gas Wars" = mat_color_hex[['blue-900']],
-  "Economic policies" = mat_color_hex[['blue-700']],
-  "Labor" = mat_color_hex[['blue-500']],
-  "Education" = mat_color_hex[['blue-200']],
-  "Coca" = mat_color_hex[['green-900']],
-  "Peasant" = mat_color_hex[['green-600']],
-  "Rural Land" = mat_color_hex[['green-300']],
-  "Rural Land, Partisan Politics" = mat_color_hex[['green-200']],
-  "Ethno-ecological" = mat_color_hex[['light green-100']],
-  "Drug trade" = mat_color_hex[['lime-700']],
-  "Contraband" = mat_color_hex[['lime-400']],
-  "Mining" = mat_color_hex[['red-700']],
-  "Local development" = mat_color_hex[['deep purple-700']],
-  "Municipal governance" = mat_color_hex[['deep purple-400']],
-  "Partisan Politics" = mat_color_hex[['pink-300']],
-  "Disabled" = mat_color_hex[['blue grey-600']],
-  "Guerrilla" = mat_color_hex[['brown-800']],
-  "Paramilitary" = mat_color_hex[['brown-400']],
-  "Urban land" = mat_color_hex[['yellow-500']],
-  "Unknown" = mat_color_hex[['grey-300']]
-)
+assign_protest_domain.colors <- function() {
+  c( 
+    "Gas wars" = mat_color_hex[['blue-900']],
+    "Economic policies" = mat_color_hex[['blue-700']],
+    "Labor" = mat_color_hex[['blue-500']],
+    "Education" = mat_color_hex[['blue-200']],
+    "Mining" = mat_color_hex[['red-700']],
+    "Coca" = mat_color_hex[['green-900']],
+    "Peasant" = mat_color_hex[['green-600']],
+    "Rural land" = mat_color_hex[['green-300']],
+    "Rural land, Partisan politics" = mat_color_hex[['green-200']],
+    "Ethno-ecological" = mat_color_hex[['light green-100']],
+    "Drug trade" = mat_color_hex[['lime-700']],
+    "Contraband" = mat_color_hex[['lime-400']],
+    "Local development" = mat_color_hex[['deep purple-700']],
+    "Municipal governance" = mat_color_hex[['deep purple-400']],
+    "Partisan politics" = mat_color_hex[['pink-300']],
+    "Disabled" = mat_color_hex[['blue grey-600']],
+    "Guerrilla" = mat_color_hex[['brown-800']],
+    "Paramilitary" = mat_color_hex[['brown-400']],
+    "Urban land" = mat_color_hex[['yellow-500']],
+    "Unknown" = mat_color_hex[['grey-300']]
+  )
+} 
 
-
+protest_domain.colors <- assign_protest_domain.colors()

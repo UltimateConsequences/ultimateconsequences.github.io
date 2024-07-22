@@ -1,4 +1,5 @@
 # load packages
+install.packages("here") # manage file directory
 install.packages("googlesheets4") # access to Google Sheets
 # Make sure you run this separately since it needs keyboard input
 
@@ -10,6 +11,7 @@ install.packages("usethis") # enables remote management of github
 
 install.packages('treemapify')
 
+install.packages("incase") # an add-on to dplyr for better case handling
 install.packages("naniar") # analyzes missing values
 install.packages("arsenal") # makes pretty summary tables
 install.packages("skimr") # characterizes the variables
@@ -32,11 +34,17 @@ install.packages("magick")
 install.packages("kableExtra")
 install.packages("english")
 install.packages("datawizard")
+install.packages("countrycode")
 
 
 install.packages("ggthemes")
 install.packages("ggtext")
 install.packages("ggfittext")
+
+install.packages("sf") # SF, a spatial data system
+install.packages("tmap") # Thematic maps
+install.packages("tmaptools") # Tools for tmap
+install.packages("SUNGEO")             # Sub-National Geospatial Data Archive: Geoprocessing Toolkit
 
 install.packages('stringdist') # fuzzy string matching
 

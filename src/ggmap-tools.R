@@ -9,7 +9,7 @@ library(ggmap)
 register_google(key = "AIzaSyDDwG1E0UXjQqduHQ5jf1IQ5BuQfi3a3HI")
 
 loc.villatunari <- "Villa Tunari, Cochabamba, Bolivia"
-
+loc.santacruz <- "Santa Cruz, Bolivia"
 
 # geocode described here: https://www.rdocumentation.org/packages/ggmap/versions/3.0.1/topics/geocode
 gc.villatunari <- geocode(
@@ -17,6 +17,15 @@ gc.villatunari <- geocode(
   output = "latlon",
   urlonly = FALSE,
   override_limit = FALSE,
+  region="bo"
+)
+
+gc.santacruz <- geocode(
+  loc.santacruz,
+  output = "latlon",
+  urlonly = FALSE,
+  override_limit = FALSE,
+  region="bo"
 )
 
 de.loc <- de %>% unite("location", address:department, sep=", ",
@@ -54,10 +63,16 @@ de.municipality.located <- left_join(de.municipality, locations_df)
 
 de.address <- de %>% filter((!is.na(address))&(!is.na(community))) %>%
                      mutate(community=NULL) %>%
-                           unite("location", address:department, sep=", ", 
-                                na.rm=TRUE, remove=FALSE) %>% select(event_title, location)
+                     unite("location", address:department, sep=", ", 
+                                na.rm=TRUE, remove=FALSE) %>% 
+                     select(event_title, location)
 
-de.address.dist <- de.address %>% arrange(location) %>% distinct()
+de.address_alt <- de %>% filter((!is.na(address))) %>%
+  mutate(community=NULL) %>%
+  unite("location", address:department, sep=", ", 
+        na.rm=TRUE, remove=FALSE) %>% select(event_title, location)
+
+de.address.dist <- de.address_alt %>% arrange(location) %>% distinct()
 flextable(de.address.dist)
 
 addresses <- str_unique(de.address$location)

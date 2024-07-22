@@ -139,7 +139,7 @@ p
 # Use the magic of ggplotly to have an interactive version
 ggplotly(p, tooltip="text") %>% layout(hoverlabel=list(bgcolor="white"))
 
-## Same thing but for protest domain
+## Same thing but for department
 p <- ggplot(don, aes(x=year, y=y) ) +
   geom_tile( aes(text=tooltiptext, fill=department), width=0.95, height=0.8) +
   xlab('Year') +

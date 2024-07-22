@@ -26,12 +26,14 @@ pacman::p_load(
    # lubridate,  # work with dates
    # purrr       # iteration and working with lists
   #  linelist,     # cleaning linelists
+  incase,       # an add-on to dplyr for better case handling
   naniar,       # assessing missing data
   skimr,         # characterizes the variables
   scales,       # useful for "percent()"
   english,      # convert numbers to words
   datawizard,   # multiple kinds of data wrangling
   stringdist,   # fuzzy string matching
+  countrycode,  # ISO geographic codes 
   
   # statistics  
   ############
@@ -75,8 +77,13 @@ pacman::p_load(
   kableExtra,       # upgrade Kable formatting
    #  gganimate,        # animated graphics 
   ggalluvial,      # alluvial / Sankey plots
-  kableExtra       # enhance table output
+  kableExtra,       # enhance table output
   
+  # maps and geocoding
+  sf,                # SF, a spatial data system
+  tmap,              # Thematic maps
+  tmaptools,         # Tools for tmap
+  SUNGEO             # Sub-National Geospatial Data Archive: Geoprocessing Toolkit
   
 )
 

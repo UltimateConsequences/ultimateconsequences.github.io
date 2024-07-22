@@ -23,6 +23,10 @@ census_table_2012 <- census_table_2012 %>%
   mutate(municipality = recode(municipality, "Independencia" = "Ayopaya")) %>% # Dual name for this municipality  
   mutate(municipality = recode(municipality, "San Ignacio" = "San Ignacio de Moxos")) 
 
+write_rds(census_table_2012, here::here("data", "census_table_municipios_2012.rds"))
+
+# census_table_2012 <- read_rds(here::here("data", "census_table_municipios_2012.csv"))
+
 census_population <- census_table_2012 %>% select(municipality, department, t_2001, t_2012)
 
 # Counting deaths per municipality
