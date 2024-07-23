@@ -154,6 +154,8 @@ de <- de %>% mutate(age = round(dec_age, digits = 0))
 #
 # This table is generated using the variable: de
 source(here::here("src","event-responsibility-dated.R"), local = knitr::knit_global())
+
+event.responsibility <- event_responsibilty_summary_table(de) # for ALL deaths
 ```
 
 ```{r event_table, include=FALSE, message=FALSE, results='asis'}

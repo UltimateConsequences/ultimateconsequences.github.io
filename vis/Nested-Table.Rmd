@@ -61,53 +61,24 @@ de <- de %>%
   filter(is.na(intentionality) | !str_detect(intentionality, "Nonconflict"))
 ```
 
-```{r factor_presadmin, include=FALSE}
-library(janitor) # for tabyl
-source(here::here("src","data-cleaning.R"), local = knitr::knit_global())
-
-president_levels <- c(
-  "Hernán Siles Zuazo", "Víctor Paz Estenssoro", "Jaime Paz Zamora", 
-  "Gonzalo Sanchez de Lozada (1st)", "Hugo Banzer (2nd)", "Jorge Quiroga",
-  "Gonzalo Sanchez de Lozada (2nd)", "Carlos Diego Mesa Gisbert", 
-  "Eduardo Rodríguez", "Evo Morales", "Interim military government", 
-  "Jeanine Áñez", "Luis Arce")
-de <- de %>% mutate(pres_admin=factor(pres_admin, levels=president_levels))
-
-state_resp.colors <-  c(
-  Perpetrator = "forestgreen", 
-  Victim = "#cd6600",                  # "darkorange3",
-  Involved = "#90ee90",                # "lightgreen",         
-  Separate = "#eeb422",                # "goldenrod2",
-  Unintentional = "darkgray",
-  Unknown = "lightgray")
-
-de <- de %>% mutate(state_responsibility = case_when(    # overwrite the state responsibility for unintentional cases
-                                   intentionality == "Incidental" ~ "Incidental",
-                                   intentionality == "Conflict Accident" ~ "Accidental",
-                                   TRUE ~ state_responsibility))
-
-de$state_responsibility <- convert_na_to(de$state_responsibility, replacement = "Unknown")
-de$state_responsibility <- fct_collapse(de$state_responsibility, 
-                             Perpetrator = c("State perpetrator", "State likely perpetrator", 
-                                             "State perpetrator, State victim refusing orders", 
-                                             "State perpetrator, State victim in mutiny",
-                                             "State indirect perpetrator"),
-                             Involved = c("State involved", "Political victim", 
-                                          "Political victim / political perpetrator",
-                                          "Political victim / unknown perpetrator",
-                                          "Possibly state involved"),
-                             Victim = c("State victim",  
-                                        "State victim, State perpetrator in mutiny"), 
-                             Separate = c("Separate from state"),
-                             Unintentional = c("Incidental", "Accidental"),
-                             Unknown  = c("Unknown", "Unclear") )
-
-sr_levels <- c("Perpetrator", "Victim", "Involved", "Separate", "Unintentional", "Unknown")
-de$state_responsibility <- fct_relevel(de$state_responsibility, sr_levels)
-
-de <- de %>% mutate(age = round(dec_age, digits = 0))
-
-
+```{r factoring, include=FALSE}
+source(here::here("src","03-factoring-standard.R"), local = knitr::knit_global())
+# This call accomplishes…
+#
+## Factoring: Presidential administration
+# Creates global variables: president_levels, president_initials
+#
+## Factoring: State perpetrator (a quasilogical variable)
+# Factored into five simplified levels
+# "Unknown", "No", "Indirect", "Mutiny", "Yes"
+#
+## Factoring: State responsibility (a categorical variable)
+# Factored into six simplified levels
+# sr_levels <- c("Perpetrator", "Victim", "Involved", "Separate", "Unintentional", "Unknown")
+# Color set: state_resp.colors
+#
+# If the call is made to "03-factoring-verbose.R" and has "include=TRUE", 
+# will return summary tabyl's for the refactored variables..
 ```
 
 ```{r calculate-event-table, echo=FALSE, message=FALSE, warning=FALSE}
@@ -115,6 +86,8 @@ de <- de %>% mutate(age = round(dec_age, digits = 0))
 #   and state victim deaths
 #
 source(here::here("src","event-responsibility-dated.R"), local = knitr::knit_global())
+
+event.responsibility <- event_responsibilty_summary_table(de) # for ALL deaths
 ```
 
 ```{r event_table, include=FALSE, message=FALSE, results='asis'}
@@ -173,10 +146,6 @@ tbl <- reactable(event.responsibility,
                                  filterable=TRUE, sortNALast = TRUE,
                                  style = list(background = "#ffffff")),
                    year = colDef (show = FALSE),
-                   # year = colDef (name="Year", maxWidth=60,
-                   #                defaultSortOrder = "asc",
-                   #                filterable=TRUE, sortNALast = TRUE,
-                   #                style = list(background = "#ffffff")),
                    event_title = colDef (name="Event", maxWidth=250,
                                          defaultSortOrder = "asc",
                                          filterable=TRUE,
@@ -213,70 +182,11 @@ This table can be ordered by any of its variables and searched by the text varia
 
 Using the triangles at left, you can access the individual deaths.
 
-```{r chronologicalview, echo=FALSE, message=FALSE, warning=FALSE, results='asis'}
+```{r drill-down-table, echo=FALSE, message=FALSE, warning=FALSE, results='asis'}
 library(lubridate)
 library(reactable)
 library(reactablefmtr)
 
-deaths_chron4 <- select(de, event_title, year, month, day, later_year, later_month, later_day,
-                        dec_firstname, dec_surnames, age, dec_affiliation, 
-                        intentionality, cause_death, 
-                        state_responsibility, perp_affiliation, protest_domain)
-
-deaths_chron4 <- combine_dates(deaths_chron4, incl_laterdate=TRUE)
-
-# deaths_chron4selected <- deaths_chron4 %>% select(event_title, date,
-#                                                   dec_firstname, dec_surnames, age,
-#                                                   dec_affiliation,
-#                                                   intentionality, state_responsibility, perp_affiliation
-#                                                   )
-# 
-# reactable(deaths_chron4selected, 
-#           groupBy = "event_title",
-#           theme = nytimes(),
-#           defaultPageSize=20,
-#           pageSizeOptions = c(10, 20, 30, 40, 100),
-#           columns = list (
-#             event_title = colDef (name="Event", minWidth = 200), 
-#             date = colDef(cell = function(value) strftime(value, "%d %b %Y"),
-#                          defaultSortOrder = "asc",name="Event Date", aggregate = "unique"),
-#             dec_firstname = colDef (name="First name"),
-#             dec_surnames = colDef (name="Surnames"),
-#             age = colDef (name="Age"),
-#             dec_affiliation = colDef (name="Affiliation"),
-#             intentionality = colDef (name="Intentionality", aggregate = "frequency"),
-#             state_responsibility = colDef(name = "State Responsibility",
-#                                           maxWidth = 150,
-#                                           defaultSortOrder = "asc",
-#                                           style = function(value, index) {
-#                                             if(is.na(value)){
-#                                               list(color = "black")
-#                                             }else if(value %in% 
-#                                                      c("Separate", "Perpetrator", "Victim")){
-#                                               list(color = state_resp.colors[[value]])
-#                                             }else {
-#                                               list(color = "black")
-#                                             }
-#                                           },aggregate = "frequency"),
-#             perp_affiliation = colDef(name = "Perp Affiliation",
-#                                             defaultSortOrder = "asc",
-#                                           style = function(value, index) {
-#                                             if(is.na(deaths_chron4selected$state_responsibility[index])){
-#                                               list(color = "black")
-#                                             }else if(deaths_chron4selected$state_responsibility[index] %in%
-#                                                      c("Separate", "Perpetrator", "Victim")){
-#                                               list(color =
-#                                   state_resp.colors[[deaths_chron4selected$state_responsibility[index]]])
-#                                             }else {
-#                                               list(color = "black")
-#                                             }
-#                                           },aggregate = "frequency")
-#             )
-#           )
-# cat(paste(datafiles_footer(),sep=""))
-```
-
-```{r drill-down-table, echo=FALSE, message=FALSE, warning=FALSE, results='asis'}
 top_level <- event.responsibility %>% arrange(date)
 
 de <- de %>% mutate(intentionality = case_when(
@@ -313,10 +223,6 @@ reactable(
                     filterable=TRUE, sortNALast = TRUE,
                     style = list(background = "#ffffff")),
     year = colDef (show = FALSE),
-    # year = colDef (name="Year", maxWidth=60,
-    #                defaultSortOrder = "asc",
-    #                filterable=TRUE, sortNALast = TRUE,
-    #                style = list(background = "#ffffff")),
     event_title = colDef (name="Event", maxWidth=250,
                           defaultSortOrder = "asc",
                           filterable=TRUE,
