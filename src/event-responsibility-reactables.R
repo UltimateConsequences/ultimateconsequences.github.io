@@ -1,5 +1,6 @@
 library(reactable)
 library(reactablefmtr)
+library(lubridate)
 
 ## Color scales
 # 
@@ -43,6 +44,37 @@ text_column <- function(static=FALSE, ...) {
     ...
   )
 }
+#
+#
+# column list
+#
+# Too many variables, so this can't be passed as a function, but can be sourced!
+#
+# er_column_list <- list (date = colDef(name="Year", maxWidth=60,
+#                 cell = function(value) strftime(value, "%Y"),
+#                 defaultSortOrder = "asc",
+#                 filterable=TRUE, sortNALast = TRUE,
+#                 style = list(background = "#ffffff")),
+#   year = colDef (show = FALSE), 
+#   event_title = text_column(static=static, name="Event", maxWidth=250,
+#                         style = list(fontWeight = "bold")),
+#   n = deaths_column(maxValue = max_deaths, name="Confirmed"),
+#   n_state_perp = deaths_column(maxValue = max_deaths, name="State Perp",
+#                                chosen_palette = perp_pal),
+#   n_state_victim = deaths_column(maxValue = max(max_deaths/2, max_sv_deaths),  
+#                                  # sets the maximum intensity 
+#                                  name="State Victim",
+#                                  chosen_palette = sv_pal),
+#   n_state_separate = deaths_column(maxValue = max(max_deaths/2, max_sep_deaths),  
+#                                    # sets the maximum intensity 
+#                                    name="Sep from State",
+#                                    chosen_palette = sep_pal),
+#   protest_domain = text_column(static=static, name="Protest Domain",
+#                            maxWidth=150),
+#   pres_admin = text_column(static=static, name="President",
+#                            maxWidth=300)
+# )
+
 
 # event responsibility table
 # 
@@ -69,46 +101,43 @@ standard_event_responsibility_reactable <- function(event.responsibility, static
     defaultPageSize = 20
     pageSizeOptions =  c(10, 15, 20, 25, 40, 50, 75)   
   }
+  
+  source(here::here("src","er-column-list.R"), local = TRUE)
 
-  tbl <- reactable(event.responsibility,
-                   filterable=!static,
-                   theme = nytimes(),
-                   defaultPageSize = defaultPageSize,
-                   pageSizeOptions = pageSizeOptions,
-                   showPageSizeOptions=TRUE,
-                   defaultColDef = colDef(
+  if (static){
+    tbl <- reactable(event.responsibility,
                      filterable=FALSE,
-                     defaultSortOrder = "desc",
-                     minWidth = 30, maxWidth=50),
-                   columnGroups = list(colGroup(name = "deaths", columns =
-                                                  er.numerical.columns)
-                   ),
-                   columns = list (
-                     date = colDef(name="Year", maxWidth=60,
-                                   cell = function(value) strftime(value, "%Y"),
-                                   defaultSortOrder = "asc",
-                                   filterable=!static, sortNALast = TRUE,
-                                   style = list(background = "#ffffff")),
-                     year = colDef (show = FALSE), 
-                     event_title = text_column(name="Event", maxWidth=250,
-                                               style = list(fontWeight = "bold")),
-                     n = deaths_column(maxValue = max_deaths, name="Confirmed"),
-                     n_state_perp = deaths_column(maxValue = max_deaths, name="State Perp",
-                                                  chosen_palette = perp_pal),
-                     n_state_victim = deaths_column(maxValue = max(max_deaths/2, max_sv_deaths),  
-                                                    # sets the maximum intensity 
-                                                    name="State Victim",
-                                                    chosen_palette = sv_pal),
-                     n_state_separate = deaths_column(maxValue = max(max_deaths/2, max_sep_deaths),  
-                                                      # sets the maximum intensity 
-                                                      name="Sep from State",
-                                                      chosen_palette = sep_pal),
-                     protest_domain = text_column(name="Protest Domain",
-                                                  maxWidth=150),
-                     pres_admin = text_column(name="President",
-                                              maxWidth=300)
-                   )
-  )
+                     theme = nytimes(),
+                     defaultPageSize = defaultPageSize,
+                     pageSizeOptions = pageSizeOptions,
+                     showPageSizeOptions=TRUE,
+                     defaultColDef = colDef(
+                       filterable=FALSE,
+                       defaultSortOrder = "desc",
+                       minWidth = 30, maxWidth=50),
+                     columnGroups = list(colGroup(name = "deaths", columns =
+                                                    er.numerical.columns)
+                     ),
+                     columns = er_column_list_static 
+    )
+  }else{
+    tbl <- reactable(event.responsibility,
+                     filterable=TRUE,
+                     theme = nytimes(),
+                     defaultPageSize = defaultPageSize,
+                     pageSizeOptions = pageSizeOptions,
+                     showPageSizeOptions=TRUE,
+                     defaultColDef = colDef(
+                       filterable=FALSE,
+                       defaultSortOrder = "desc",
+                       minWidth = 30, maxWidth=50),
+                     columnGroups = list(colGroup(name = "deaths", columns =
+                                                    er.numerical.columns)
+                     ),
+                     columns = er_column_list_dynamic 
+    )
+  }
+  
   tbl
 }
 
@@ -220,4 +249,47 @@ individual_directory_reactable <- function(dataframe, static = FALSE,
   )
 }
 
+## Two level event-responsibility reactable with directory inside
+#
+#
+nested_event_responsibility_reactable <- function(event.responsibility, dataframe,
+                                                  static=FALSE, max_larger=0,
+                                                  short_table=FALSE) {
+  top_level <- event.responsibility 
+  # set limits for shading gradient
+  max_deaths <- max(select(event.responsibility, n:n_state_victim),  na.rm=TRUE)
+  max_sv_deaths <- max(select(event.responsibility, n_state_victim), na.rm=TRUE)
+  max_sep_deaths <- max(select(event.responsibility, n_state_separate), na.rm=TRUE)
+  max_deaths <- max(max_deaths, max_larger) # pass through a maximum value as specified in the function call
 
+  second_level <- dataframe %>% combine_dates() %>% 
+    select(event_title, date, dec_firstname, dec_surnames, age,
+           dec_affiliation, cause_death, intentionality, 
+           state_responsibility, perp_affiliation)
+ 
+  source(here::here("src","er-column-list.R"), local = TRUE)
+  
+  reactable(
+    data       = top_level,
+    compact    = TRUE, # for minimum row height
+    filterable = TRUE, # for individual column filters
+    striped    = FALSE, # banded rows
+    resizable  = FALSE, # for resizable column widths
+    theme = nytimes(),
+    defaultPageSize=30,
+    pageSizeOptions = c(12, 20, 30, 40, 100),
+    showPageSizeOptions=TRUE,
+    defaultColDef = colDef(
+      filterable=FALSE,
+      defaultSortOrder = "desc",
+      minWidth = 30, maxWidth=50),
+    columnGroups = list(colGroup(name = "deaths", columns =
+                                   er.numerical.columns)),
+    columns = er_column_list_dynamic,
+    details = function(index) { # index is the row number of current row.
+      # sub-table of only those students for current row.
+      sec_lvl = second_level[second_level$event_title == top_level$event_title[index], ] 
+      individual_directory_reactable(sec_lvl, show_event_title = FALSE)
+    }
+  )
+}

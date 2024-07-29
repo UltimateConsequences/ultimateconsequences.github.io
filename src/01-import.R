@@ -13,6 +13,7 @@ library(googlesheets4)
 
 source(here::here("src","import-deaths-database-spec1.R"))
 source(here::here("src", "update-versioned-archive.R"))
+source(here::here("src", "here_filename.R"))
 
 if (live.import){
   # Import the Entries
@@ -27,18 +28,17 @@ if (live.import){
   pt <- import_presidents_table()
   pt.filename.dated <- update_versioned_archive(pt, pt.filename)
   
-}else
-{
+}else{
   de.path <- dirname(de.filename)
-  de.filename_base <- basename(de.filename)
-  de.filename_full <- here(de.path, de.filename_base)
-  
+  # de.filename_base <- basename(de.filename)
+  # de.filename_full <- here::here(de.path, de.filename_base)
+   
   pt.path <- dirname(pt.filename)
-  pt.filename_base <- basename(pt.filename)
-  pt.filename_full <- here(pt.path, pt.filename_base)
+  # pt.filename_base <- basename(pt.filename)
+  # pt.filename_full <- here::here(pt.path, pt.filename_base)
   
-  de <- read_rds(de.filename_full) 
-  pt <- read_rds(pt.filename_full)
+  de <- read_rds(here_filename(de.filename)) 
+  pt <- read_rds(here_filename(pt.filename))
   
   if(use.current.archive){ # if the filenames are undated, 
     # use the most recent archived file as
@@ -72,14 +72,13 @@ if (live.import.es){
   # Save current version of the file to data/
   #
   es.filename.dated <- update_versioned_archive(event.status, es.filename)
-}else
-{
+}else{
 
   es.path <- dirname(es.filename)
-  es.filename_base <- basename(es.filename)
-  es.filename_full <- here(es.path, es.filename_base)
+  # es.filename_base <- basename(es.filename)
+  # es.filename_full <- here::here(es.path, es.filename_base)
   
-  event.status <- read_rds(es.filename_full) 
+  event.status <- read_rds(here_filename(es.filename)) 
   
   if(use.current.es.archive){ # if the filenames are undated, 
     # use the most recent archived file as
@@ -91,8 +90,7 @@ if (live.import.es){
     filelist <- filelist[with(filelist, order(as.POSIXct(mtime))), ]
     files <- rownames(filelist)
     es.filename.dated <- paste(es.path, tail(files, 1), sep="/")
-  }else
-  {
+  }else{
     es.filename.dated <- es.filename
   }
 }

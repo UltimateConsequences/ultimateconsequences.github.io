@@ -97,11 +97,32 @@ estimated_date_string <- function(year, month, day){
   return(date_string)
 }
 
-combine_dates <- function(dataframe, incl_laterdate=FALSE, date_at_front=FALSE){
-  dataframe <- dataframe %>% 
-                 mutate(date_text = estimated_date_string(year, month, day)) %>%
-                 mutate(date = as.Date(ymd(date_text)) )
+displayed_date_string <- function(year, month, day){
+  # Unfortunate work around to the simultaneous evaluation done by in_case()
+  # when using the vectors month.abb, month.name
+  month_name <- ""
+  month_abb <- ""
+  if (!is.na(month)) {
+    month_name <- month.name[month]
+    month_abb <- month.abb[month]
+  }
   
+  date_string <- in_case(
+    (is.na(year)) ~ "Date Unknown",
+    ((is.na(day) & is.na(month) & !is.na(year))) ~ str_glue("{year}"),
+    (is.na(day) & !is.na(month) & !is.na(year)) ~ str_glue("{month_name} {year}"),
+    TRUE ~ str_glue("{day} {month_abb} {year}")
+  ) 
+  
+  return(date_string)
+}
+
+combine_dates <- function(dataframe, incl_laterdate=FALSE, date_at_front=FALSE,
+                          unknown_date_string = NA){
+  dataframe <- dataframe %>% rowwise() %>%
+                 mutate(date_text = estimated_date_string(year, month, day)) %>%
+                 mutate(date = as.Date(ymd(date_text))) %>%
+                 mutate(date_text = displayed_date_string(year, month, day))
   
   if(incl_laterdate & ("later_day" %in% colnames(dataframe))){
     dataframe <- mutate(dataframe,

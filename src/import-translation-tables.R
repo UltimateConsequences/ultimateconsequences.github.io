@@ -55,7 +55,7 @@ intent_trans_table <- range_read(ss=database_file, col_names = TRUE,
 itt.filename <-  "data/intentionality-trans-table.rds"
 update_versioned_archive(intent_trans_table, itt.filename)
 
-# intentionality
+# event_title
 event_trans_table <- range_read(ss=database_file, col_names = TRUE,
                                  range = "EventTitleTranslationTable")
 ett.filename <-  "data/event-trans-table.rds"
@@ -71,11 +71,17 @@ translation <- list(protest_domain = domain_trans_table,
                     intentionality = intent_trans_table,
                     event_title = event_trans_table
                     )
+# if only updating one variable, do something link this…
+translation$event_title <- event_trans_table
+
 translation.tables.filename <- here::here("data","translation-tables.rds")
 update_versioned_archive(translation, translation.tables.filename)
 
 # Test scripts follow…
-
+#
+# find mismatches:
+# anti_join(translation$event_title, select(de, event_title, id_indiv), by=join_by(en==event_title))
+#
 # translation$intentionality[translation$intentionality$en=="Direct", "es"]
 # 
 # left_join(de.cochabamba, translation$intentionality, by = c("intentionality"="en")) %>% rename(intentionalidad = es)

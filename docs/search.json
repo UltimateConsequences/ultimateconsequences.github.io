@@ -34,9 +34,9 @@
   {
     "objectID": "vis/Directorio-Eventos-Muertes.html",
     "href": "vis/Directorio-Eventos-Muertes.html",
-    "title": "Directorio cronológico de muertes en conflictos políticos bolivianos, octubre 1982 - mayo 2023",
+    "title": "Directorio cronológico de muertes en conflictos políticos bolivianos, octubre 1982 - mayo 2024",
     "section": "",
-    "text": "Tabla de datos, organizado por evento\nEsta tabla se puede ordenar por cualquiera de sus variables y buscar por las variables de texto así como por el año. En la parte inferior, puede elegir cuántos eventos mostrar o recorrer los eventos.\nUsando los triángulos a la izquierda, puede acceder a las muertes individuales.\n\n\nEntries: data/deaths-entries-2023-09-08.rds",
+    "text": "Tabla de datos, organizado por evento\nEsta tabla se puede ordenar por cualquiera de sus variables y buscar por las variables de texto así como por el año. En la parte inferior, puede elegir cuántos eventos mostrar o recorrer los eventos.\nUsando los triángulos a la izquierda, puede acceder a las muertes individuales.\n\n\nEntries: data/deaths-entries-2024-07-23.rds",
     "crumbs": [
       "Visualizations",
       "Directorio cronológico de muertes"
@@ -713,7 +713,7 @@
     "href": "vis/Nested-Table.html",
     "title": "Directory of individual deaths, summarized by event",
     "section": "",
-    "text": "Chronological view of events and deaths\nThis table can be ordered by any of its variables and searched by the text variables as well as the year. At the bottom you can choose how many events to show, or page through the events.\nUsing the triangles at left, you can access the individual deaths.\n\n\nEntries: data/deaths-entries-2023-09-08.rds",
+    "text": "Chronological view of events and deaths\nThis table can be ordered by any of its variables and searched by the text variables as well as the year. At the bottom you can choose how many events to show, or page through the events.\nUsing the triangles at left, you can access the individual deaths.\n\n\nEntries: data/deaths-entries-2024-07-23.rds",
     "crumbs": [
       "Visualizations",
       "Directory of event & individuals"

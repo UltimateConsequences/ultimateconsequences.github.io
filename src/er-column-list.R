@@ -1,0 +1,48 @@
+er_column_list_dynamic <- list (date = colDef(name="Year", maxWidth=60,
+                                      cell = function(value) strftime(value, "%Y"),
+                                      defaultSortOrder = "asc",
+                                      filterable=TRUE, sortNALast = TRUE,
+                                      style = list(background = "#ffffff")),
+                        year = colDef (show = FALSE), 
+                        event_title = text_column(static=FALSE, name="Event", maxWidth=250,
+                                                  style = list(fontWeight = "bold")),
+                        n = deaths_column(maxValue = max_deaths, name="Confirmed"),
+                        n_state_perp = deaths_column(maxValue = max_deaths, name="State Perp",
+                                                     chosen_palette = perp_pal),
+                        n_state_victim = deaths_column(maxValue = max(max_deaths/2, max_sv_deaths),  
+                                                       # sets the maximum intensity 
+                                                       name="State Victim",
+                                                       chosen_palette = sv_pal),
+                        n_state_separate = deaths_column(maxValue = max(max_deaths/2, max_sep_deaths),  
+                                                         # sets the maximum intensity 
+                                                         name="Sep from State",
+                                                         chosen_palette = sep_pal),
+                        protest_domain = text_column(static=FALSE, name="Protest Domain",
+                                                     maxWidth=150),
+                        pres_admin = text_column(static=FALSE, name="President",
+                                                 maxWidth=300))
+
+
+er_column_list_static <- list (date = colDef(name="Year", maxWidth=60,
+                                              cell = function(value) strftime(value, "%Y"),
+                                              defaultSortOrder = "asc",
+                                              filterable=TRUE, sortNALast = TRUE,
+                                              style = list(background = "#ffffff")),
+                                year = colDef (show = FALSE), 
+                                event_title = text_column(static=TRUE, name="Event", maxWidth=250,
+                                                          style = list(fontWeight = "bold")),
+                                n = deaths_column(maxValue = max_deaths, name="Confirmed"),
+                                n_state_perp = deaths_column(maxValue = max_deaths, name="State Perp",
+                                                             chosen_palette = perp_pal),
+                                n_state_victim = deaths_column(maxValue = max(max_deaths/2, max_sv_deaths),  
+                                                               # sets the maximum intensity 
+                                                               name="State Victim",
+                                                               chosen_palette = sv_pal),
+                                n_state_separate = deaths_column(maxValue = max(max_deaths/2, max_sep_deaths),  
+                                                                 # sets the maximum intensity 
+                                                                 name="Sep from State",
+                                                                 chosen_palette = sep_pal),
+                                protest_domain = text_column(static=TRUE, name="Protest Domain",
+                                                             maxWidth=150),
+                                pres_admin = text_column(static=TRUE, name="President",
+                                                         maxWidth=300))
